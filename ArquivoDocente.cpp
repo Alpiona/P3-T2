@@ -9,11 +9,11 @@ ArquivoDocente::ArquivoDocente() {
 }
 
 ArquivoDocente::ArquivoDocente(string pathname){
-//    this->pathname = pathname;
     this->entrada.open(pathname);
-    if (!this->entrada.is_open()){
+    if (!(this->entrada.is_open())){
         cout<<"ERRO "<<pathname<<endl;
     }
+    loadDataToMemory();
 }
 
 void ArquivoDocente::loadDataToMemory(){
@@ -26,34 +26,39 @@ void ArquivoDocente::loadDataToMemory(){
         getline(this->entrada, line);
 
         bool cord = false;
-        if (line.find("X")){
-            cord = true;
-//            cout << "CORD ";
-        }
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string codigo = aux;
         line.erase(0,pos+1);
-//        cout << codigo << " ";
+        cout << codigo << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string nome = aux;
         line.erase(0,pos+1);
-//        cout << nome << " ";
+        cout << nome << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string dataNascimento = aux;
         line.erase(0,pos+1);
-//        cout << dataNascimento << " ";
+        cout << dataNascimento << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string dataIngresso = aux;
         line.erase(0,pos+1);
-//        cout << dataIngresso << "\n";
+        cout << dataIngresso << " ";
+
+        if (line.length()){
+            cord = true;
+            cout << "CORD" << endl;
+        }
+        else{
+            cout << endl;
+        }
+
     }
 }
 

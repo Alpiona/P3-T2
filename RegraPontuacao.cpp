@@ -1,6 +1,12 @@
 #include "RegraPontuacao.h"
+#include <array>
 
-RegraPontuacao::RegraPontuacao(int *pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima) {
+using namespace std;
+
+RegraPontuacao::RegraPontuacao() {}
+
+RegraPontuacao::RegraPontuacao(array<int,8> pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima) {
+    this->categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
 //    this->dataInicio = dataInicio;
 //    this->dataFinal = dataFinal;
     this->pontuacaoQualis = pontuacaoQualis;
@@ -11,7 +17,7 @@ RegraPontuacao::RegraPontuacao(int *pontuacaoQualis, double multiplicador, int q
 
 int RegraPontuacao::valorQualis(string qualis) {
     for (int i =0; i<8; i++){
-        if (categoriaQualis[i] == qualis){
+        if (this->categoriasQualis[i].compare(qualis) == 0){
             return (pontuacaoQualis[i]);
         }
     }

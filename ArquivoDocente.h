@@ -6,8 +6,6 @@
 #include <fstream>
 #include "Docente.h"
 
-using namespace std;
-
 class Docente;
 
 class ArquivoDocente {
@@ -18,7 +16,7 @@ private:
 
 public:
     ArquivoDocente();
-    ArquivoDocente(string pathname);
+    ArquivoDocente(std::string pathname);
     void loadDataToMemory();
     vector<Docente> getDocentes();
     void addDocente (Docente docente);

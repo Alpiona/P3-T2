@@ -8,5 +8,6 @@ set(SOURCE_FILES Main.cpp
         Publicacao.cpp Publicacao.h ArquivoPublicacoes.cpp ArquivoPublicacoes.h
         PublicacaoConferecia.cpp PublicacaoConferecia.h PublicacaoPeriodico.cpp PublicacaoPeriodico.h
         Qualis.cpp Qualis.h ArquivoQualificacoes.cpp ArquivoQualificacoes.h
-        Veiculo.cpp Veiculo.h ArquivoVeiculo.cpp ArquivoVeiculo.h )
+        Veiculo.cpp Veiculo.h ArquivoVeiculo.cpp ArquivoVeiculo.h
+        RegraPontuacao.cpp RegraPontuacao.h ArquivoRegras.cpp ArquivoRegras.h )
 add_executable(P3_T2 ${SOURCE_FILES})

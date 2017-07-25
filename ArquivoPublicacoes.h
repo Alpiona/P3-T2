@@ -7,24 +7,23 @@
 #include "Veiculo.h"
 #include "Publicacao.h"
 
-using namespace std;
-
 class Docente;
 class ArquivoPublicacoes {
 private:
-    ifstream entrada;
-    vector<Docente*> docentes;
-    vector<Veiculo*> veiculos;
-    vector<Publicacao*> publicacoes;
-    Veiculo containsVeiculoDeSigla(string pTitulo, string sigla);
-    //vector<Docente> loadListaAutoires(string[] autores, string pTitulo);
-    Docente isCodigoDocenteValid (string codigo);
+    std::ifstream entrada;
+    std::vector<Docente*> docentes;
+    std::vector<Veiculo*> veiculos;
+    std::vector<Publicacao*> publicacoes;
+    Veiculo containsVeiculoDeSigla(std::string pTitulo, std::string sigla);
+    //std::vector<Docente*> loadListaAutoires(string[] autores, std::string pTitulo);
+    Docente isCodigoDocenteValid (std::string codigo);
 
 public:
-    ArquivoPublicacoes(string pathname, vector<Docente*> docentes, vector<Veiculo*> veiculos);
+    ArquivoPublicacoes(std::string pathname);
+    ArquivoPublicacoes(std::string pathname, std::vector<Docente*> docentes, std::vector<Veiculo*> veiculos);
     void loadDataToLocalMemory();
-    vector<Publicacao*> getPublicacoes();
-    void adicionarPubAoAutor (Publicacao p, vector<Docente*> autores);
+    std::vector<Publicacao*> getPublicacoes();
+    void adicionarPubAoAutor (Publicacao p, std::vector<Docente*> autores);
 
 };
 

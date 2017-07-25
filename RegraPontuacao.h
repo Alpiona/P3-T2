@@ -1,21 +1,23 @@
 #ifndef P3_T2_REGRAPONTUACAO_H
 #define P3_T2_REGRAPONTUACAO_H
 
-using namespace std;
+#include <array>
+#include <string>
 
 class RegraPontuacao {
 private:
 //    Date dataInicio;
 //    Date dataFinal;
-    string categoriasQualis[8] = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
-    int pontuacaoQualis[8];
+    std::array<std::string,8> categoriasQualis;
+    std::array<int,8> pontuacaoQualis;
     double multiplicador;
     int qtdAnos;
     int pontuacaoMinima;
 
 public:
-    RegraPontuacao(int pontuacaoQualis[8], double multiplicador, int qtdAnos, int pontuacaoMinima);
-    int valorQualis(string qualis);
+    RegraPontuacao();
+    RegraPontuacao(std::array<int,8> pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima);
+    int valorQualis(std::string qualis);
 
 };
 
