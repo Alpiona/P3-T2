@@ -7,6 +7,7 @@ using namespace std;
 
 class Docente {
 private:
+    string codigo;
     string nome;
     //Date dataNascimento;
     //Date dataIngresso;
@@ -14,7 +15,7 @@ private:
     vector<Publicacao> publicacoes;
 
 public:
-    Docente(long codigo, string nome, bool coordenador);
+    Docente(string codigo, string nome, bool coordenador);
     void adicionarPublicacao(Publicacao publicacao);
 };
 

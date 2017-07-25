@@ -1,6 +1,7 @@
 #ifndef P3_T2_VEICULO_H
 #define P3_T2_VEICULO_H
 
+#include <vector>
 #include "Qualis.h"
 
 using namespace std;

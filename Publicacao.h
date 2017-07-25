@@ -2,6 +2,7 @@
 #define P3_T2_PUBLICACAO_H
 
 #include <string>
+#include <vector>
 #include "Veiculo.h"
 #include "Docente.h"
 

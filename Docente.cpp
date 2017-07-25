@@ -3,7 +3,7 @@
 
 using namespace std;
 
-Docente::Docente(long codigo, string nome, boolean coordenador) {
+Docente::Docente(string codigo, string nome, bool coordenador) {
     this->codigo = codigo;
     this->nome = nome;
 //    this->dataNascimento = dataNascimento;
