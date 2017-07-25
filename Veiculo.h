@@ -1,6 +1,7 @@
 #ifndef P3_T2_VEICULO_H
 #define P3_T2_VEICULO_H
 
+#include <string>
 #include <vector>
 #include "Qualis.h"
 
@@ -16,6 +17,7 @@ private:
     vector<Qualis> listaQualis;
 
 public:
+    Veiculo();
     Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, string ISSN);
 };
 

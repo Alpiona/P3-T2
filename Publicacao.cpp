@@ -3,7 +3,7 @@
 using namespace std;
 
 Publicacao::Publicacao(int numero, int ano, int pgInicial, int pgFinal, Veiculo veiculo,
-                       vector<Docente> autores, string titulo) {
+                       vector<Docente*> autores, string titulo) {
     this->numero = numero;
     this->ano = ano;
     this->pgInicial = pgInicial;

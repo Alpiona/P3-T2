@@ -5,6 +5,8 @@
 
 using namespace std;
 
+class Publicacao;
+
 class Docente {
 private:
     string codigo;

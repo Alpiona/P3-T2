@@ -8,10 +8,12 @@
 
 using namespace std;
 
+class Docente;
+
 class ArquivoDocente {
 private:
-    vector<Docente> docentes;
-//    string pathname;
+    vector<Docente*> docentes;
+    string pathname;
     ifstream entrada;
 
 public:
