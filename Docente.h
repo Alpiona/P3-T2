@@ -11,15 +11,18 @@ class Docente {
 private:
     string codigo;
     string nome;
-    //Date dataNascimento;
-    //Date dataIngresso;
+    time_t dataNascimento;
+    time_t dataIngresso;
     bool coordenador;
     vector<Publicacao*> publicacoes;
 
 public:
-    Docente(string codigo, string nome, bool coordenador);
+    Docente(string codigo, string nome, bool coordenador, time_t dataNascimento, time_t dataIngresso);
     void adicionarPublicacao(Publicacao *publicacao);
     string getNome();
+    bool isCoordenador();
+    bool lessThreeYears(time_t ano);
+    bool isOverSixty(time_t ano);
 };
 
 

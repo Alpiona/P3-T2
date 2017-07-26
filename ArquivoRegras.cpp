@@ -11,13 +11,17 @@ ArquivoRegras::ArquivoRegras(string pathname) {
     else{loadDataToMemory();}
 }
 
-void ArquivoRegras::loadDataToMemory() {
+void ArquivoRegras::loadDataToMemory(){
+
     string line;
     string aux;
     size_t pos = 0;
     string separador = ";";
-    getline(this->entrada, line);
-    getline(this->entrada, line);
+    while(getline(this->entrada,line)) {
+
+    }
+//    getline(this->entrada, line);
+//    getline(this->entrada, line);
 
     pos = line.find(separador);
     aux = line.substr(0, pos);

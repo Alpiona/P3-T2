@@ -1,9 +1,9 @@
 #include "ArquivoDocente.h"
 #include "ExceptionFile.h"
-#include <iostream>
-#include <fstream>
+#include "util/DateUtils.h"
 
 using namespace std;
+using namespace cpp_util;
 
 ArquivoDocente::ArquivoDocente() {
 
@@ -53,7 +53,9 @@ void ArquivoDocente::loadDataToMemory(){
             if (line.length()) {
                 cord = true;
             }
-            Docente *novoDocente = new Docente(codigo, nome, cord);    //FALTA DATAS
+            time_t dNascimento = parseDate(dataNascimento, DATE_FORMAT_PT_BR_SHORT);
+            time_t dIngresso = parseDate(dataIngresso, DATE_FORMAT_PT_BR_SHORT);
+            Docente *novoDocente = new Docente(codigo, nome, cord, dNascimento, dIngresso);
             this->docentes.push_back(novoDocente);
         }
     }
