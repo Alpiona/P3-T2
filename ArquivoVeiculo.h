@@ -14,6 +14,7 @@ private:
 
 public:
     ArquivoVeiculo(std::string pathname);
+    vector<Veiculo*> getVeiculos();
     void loadDataToMemory();
 };
 

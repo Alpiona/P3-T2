@@ -31,39 +31,33 @@ void ArquivoDocente::loadDataToMemory(){
         aux = line.substr(0,pos);
         string codigo = aux;
         line.erase(0,pos+1);
-        cout << codigo << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string nome = aux;
         line.erase(0,pos+1);
-        cout << nome << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string dataNascimento = aux;
         line.erase(0,pos+1);
-        cout << dataNascimento << " ";
 
         pos = line.find(separador);
         aux = line.substr(0,pos);
         string dataIngresso = aux;
         line.erase(0,pos+1);
-        cout << dataIngresso << " ";
 
         if (line.length()){
             cord = true;
-            cout << "CORD" << endl;
         }
-        else{
-            cout << endl;
-        }
-
+        Docente *novoDocente = new Docente(codigo, nome, cord);    //FALTA DATAS
+        this->docentes.push_back(novoDocente);
     }
+    this->docentes.pop_back();
 }
 
-vector<Docente> ArquivoDocente::getDocentes(){
-
+vector<Docente*> ArquivoDocente::getDocentes(){
+    return this->docentes;
 }
 
 void ArquivoDocente::addDocente (Docente docente){

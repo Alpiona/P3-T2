@@ -19,6 +19,7 @@ private:
 public:
     Veiculo();
     Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, string ISSN);
+    string getNome();
 };
 
 

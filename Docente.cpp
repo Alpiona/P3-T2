@@ -11,6 +11,8 @@ Docente::Docente(string codigo, string nome, bool coordenador) {
     this->coordenador = coordenador;
 }
 
-void Docente::adicionarPublicacao(Publicacao publicacao){
+void Docente::adicionarPublicacao(Publicacao *publicacao){
     this->publicacoes.push_back(publicacao);
 }
+
+string Docente::getNome() {return this->nome;}

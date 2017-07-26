@@ -14,11 +14,12 @@ private:
     //Date dataNascimento;
     //Date dataIngresso;
     bool coordenador;
-    vector<Publicacao> publicacoes;
+    vector<Publicacao*> publicacoes;
 
 public:
     Docente(string codigo, string nome, bool coordenador);
-    void adicionarPublicacao(Publicacao publicacao);
+    void adicionarPublicacao(Publicacao *publicacao);
+    string getNome();
 };
 
 

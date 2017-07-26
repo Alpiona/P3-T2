@@ -35,27 +35,32 @@ void ArquivoVeiculo::loadDataToMemory() {
 
         pos = line.find(separador);
         aux = line.substr(0, pos);
-        string tipo = aux;
+        char tipo = aux.at(0);
         line.erase(0, pos + 1);
         cout << tipo << " ";
 
         pos = line.find(separador);
         aux = line.substr(0, pos);
-        float impacto = atof(aux.c_str());  //transforma em float mas n pega depois da virgula
+        double impacto = atof(aux.c_str());  //transforma em float mas n pega depois da virgula
         line.erase(0, pos + 1);
         cout << impacto << " ";
 
+        Veiculo *novoVeiculo;
         if (line.length()>1){
             pos = line.find(separador);
             aux = line.substr(0, pos);
             string ISSN = aux;
             line.erase(0, pos + 1);
             cout << ISSN << endl;
+            novoVeiculo = new Veiculo(sigla,nome,tipo,impacto,ISSN);
         }
         else{
-            cout << endl;
+            string ISSN = NULL;
+            novoVeiculo = new Veiculo(sigla,nome,tipo,impacto,ISSN);
         }
-
+        this->veiculos.push_back(novoVeiculo);
 
     }
 }
+
+vector<Veiculo*> ArquivoVeiculo::getVeiculos() {return this->veiculos;}

@@ -12,11 +12,25 @@
 
 using namespace std;
 
+vector<Docente*> docentes;
+vector<Publicacao*> publicacoes;
+vector<Qualis*> listaQualis;
+vector<Veiculo*> veiculos;
+RegraPontuacao regra;
+
 int main() {
-//    ArquivoDocente *teste = new ArquivoDocente("docentes.csv");
+    ArquivoDocente *arqDocente = new ArquivoDocente("docentes.csv");
+    docentes = arqDocente->getDocentes();
+
+    ArquivoVeiculo *arqVeiculo = new ArquivoVeiculo("veiculos.csv");
+    veiculos = arqVeiculo->getVeiculos();
+//    for (vector<Veiculo*>::iterator veiculo = veiculos.begin(); veiculo != veiculos.end();veiculo++){
+//        Veiculo *aux = *veiculo;
+//        cout<< aux->getNome() << endl;
+//    }
 //    ArquivoPublicacoes *teste2 = new ArquivoPublicacoes("publicacoes.csv");
+
 //    ArquivoQualificacoes *teste3 = new ArquivoQualificacoes("qualis.csv");
 //    ArquivoRegras *teste4 = new ArquivoRegras("regras.csv");
-    ArquivoVeiculo *teste5 = new ArquivoVeiculo("veiculos.csv");
     return 0;
 }
