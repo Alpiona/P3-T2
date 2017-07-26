@@ -2,7 +2,7 @@
 
 using namespace std;
 
-//ArquivoQualificacoes::ArquivoQualificacoes(string pathname, vector<Veiculo*> veiculos) {
+
 ArquivoQualificacoes::ArquivoQualificacoes(string pathname) {
     this->entrada.open(pathname);
     if (!(this->entrada.is_open())){
