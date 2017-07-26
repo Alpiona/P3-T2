@@ -1,4 +1,5 @@
 #include "ArquivoQualificacoes.h"
+#include "ExceptionFile.h"
 
 using namespace std;
 
@@ -6,7 +7,7 @@ using namespace std;
 ArquivoQualificacoes::ArquivoQualificacoes(string pathname) {
     this->entrada.open(pathname);
     if (!(this->entrada.is_open())){
-        cout << "ERRO " << pathname << endl;
+        throw ExceptionFile();
     }
     loadDataToLocalMemory();
 }

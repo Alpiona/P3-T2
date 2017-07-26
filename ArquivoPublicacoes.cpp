@@ -1,4 +1,5 @@
 #include "ArquivoPublicacoes.h"
+#include "ExceptionFile.h"
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -14,7 +15,7 @@ ArquivoPublicacoes::ArquivoPublicacoes(string pathname, vector<Docente*> docente
 ArquivoPublicacoes::ArquivoPublicacoes(string pathname) {
     this->entrada.open(pathname);
     if(!(this->entrada.is_open())){
-        cout << "ERRO " << pathname << endl;
+        throw ExceptionFile();
     }
     loadDataToLocalMemory();
 }
@@ -79,14 +80,14 @@ void ArquivoPublicacoes::loadDataToLocalMemory() {
             string pgFinal = aux;
             line.erase(0, pos + 1);
 
-            if (volume.compare("") == 0){
-                PublicacaoConferecia *novaPublicacao = new PublicacaoConferecia(numero,ano,pgInicial,titulo )
-                this->publicacoes.push_back(novaPublicacao);
-            }
-            else if (local.compare("") == 0){
-                PublicacaoPeriodico *novaPublicacao = new PublicacaoPeriodico(numero,ano,pgInicial,....)
-                this->publicacoes.push_back(novaPublicacao);
-            }
+//            if (volume.compare("") == 0){
+//                PublicacaoConferecia *novaPublicacao = new PublicacaoConferecia(numero,ano,pgInicial,titulo );
+//                this->publicacoes.push_back(novaPublicacao);
+//            }
+//            else if (local.compare("") == 0){
+//                PublicacaoPeriodico *novaPublicacao = new PublicacaoPeriodico(numero,ano,pgInicial,....)
+//                this->publicacoes.push_back(novaPublicacao);
+//            }
         }
     }
 }

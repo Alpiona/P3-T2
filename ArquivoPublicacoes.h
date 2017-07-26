@@ -9,7 +9,7 @@
 #include "PublicacaoConferecia.h"
 #include "PublicacaoPeriodico.h"
 
-class Docente;
+//class Docente;
 class ArquivoPublicacoes {
 private:
     std::ifstream entrada;

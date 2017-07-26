@@ -1,4 +1,5 @@
 #include "ArquivoDocente.h"
+#include "ExceptionFile.h"
 #include <iostream>
 #include <fstream>
 
@@ -8,12 +9,15 @@ ArquivoDocente::ArquivoDocente() {
 
 }
 
-ArquivoDocente::ArquivoDocente(string pathname){
+ArquivoDocente::ArquivoDocente(string pathname) {
+
     this->entrada.open(pathname);
     if (!(this->entrada.is_open())){
-        cout<<"ERRO "<<pathname<<endl;
+        throw ExceptionFile();
+    } else {
+        loadDataToMemory();
     }
-    loadDataToMemory();
+
 }
 
 void ArquivoDocente::loadDataToMemory(){

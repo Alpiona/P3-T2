@@ -1,4 +1,5 @@
 #include "ArquivoVeiculo.h"
+#include "ExceptionFile.h"
 
 using namespace std;
 
@@ -6,7 +7,7 @@ ArquivoVeiculo::ArquivoVeiculo(string pathname) {
 
     this->entrada.open(pathname);
     if(!(this->entrada.is_open())){
-        cout<< "ERRO " << pathname << endl;
+        throw ExceptionFile();
     }
     else{
         loadDataToMemory();

@@ -9,5 +9,5 @@ set(SOURCE_FILES Main.cpp
         PublicacaoConferecia.cpp PublicacaoConferecia.h PublicacaoPeriodico.cpp PublicacaoPeriodico.h
         Qualis.cpp Qualis.h ArquivoQualificacoes.cpp ArquivoQualificacoes.h
         Veiculo.cpp Veiculo.h ArquivoVeiculo.cpp ArquivoVeiculo.h
-        RegraPontuacao.cpp RegraPontuacao.h ArquivoRegras.cpp ArquivoRegras.h )
+        RegraPontuacao.cpp RegraPontuacao.h ArquivoRegras.cpp ArquivoRegras.h ExceptionFile.cpp ExceptionFile.h)
 add_executable(P3_T2 ${SOURCE_FILES})
