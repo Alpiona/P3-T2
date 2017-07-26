@@ -10,7 +10,7 @@
 class ArquivoVeiculo {
 private:
     vector<Veiculo*> veiculos;
-    std::ofstream entrada;
+    std::ifstream entrada;
 
 public:
     ArquivoVeiculo(std::string pathname);

@@ -6,6 +6,8 @@
 #include "Docente.h"
 #include "Veiculo.h"
 #include "Publicacao.h"
+#include "PublicacaoConferecia.h"
+#include "PublicacaoPeriodico.h"
 
 class Docente;
 class ArquivoPublicacoes {
