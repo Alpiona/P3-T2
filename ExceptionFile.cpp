@@ -4,6 +4,7 @@
 
 #include "ExceptionFile.h"
 
-const char* ExceptionFile::errorMessage() const {
-    return "Erro de I/O";
+ExceptionFile::ExceptionFile() {}
+const string ExceptionFile::errorMessage() const {
+    return this->message;
 }

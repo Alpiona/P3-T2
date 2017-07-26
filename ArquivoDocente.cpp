@@ -13,7 +13,7 @@ ArquivoDocente::ArquivoDocente(string pathname) {
 
     this->entrada.open(pathname);
     if (!(this->entrada.is_open())){
-        throw ExceptionFile();
+        throw new ExceptionFile();
     } else {
         loadDataToMemory();
     }

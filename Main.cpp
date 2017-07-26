@@ -44,20 +44,20 @@ int main() {
         cout << e.errorMessage() << endl;
     }
 
-    try {
-        ArquivoRegras *arqRegras = new ArquivoRegras("regras.csv");
-        regra = arqRegras->getRegra();
-    } catch(ExceptionFile e) {
-        cout << e.errorMessage() << endl;
-    }
-
-    try {
-        ArquivoQualificacoes *arqQualificacoes = new ArquivoQualificacoes("regras.csv", veiculos);
-        arqQualificacoes->setRegra(regra);
-        listaQualis = arqQualificacoes->getQualis();
-    } catch(ExceptionFile e) {
-        cout << e.errorMessage() << endl;
-    }
+//    try {
+//        ArquivoRegras *arqRegras = new ArquivoRegras("regras.csv");
+//        regra = arqRegras->getRegra();
+//    } catch(ExceptionFile e) {
+//        cout << e.errorMessage() << endl;
+//    }
+//
+//    try {
+//        ArquivoQualificacoes *arqQualificacoes = new ArquivoQualificacoes("regras.csv", veiculos);
+//        arqQualificacoes->setRegra(regra);
+//        listaQualis = arqQualificacoes->getQualis();
+//    } catch(ExceptionFile e) {
+//        cout << e.errorMessage() << endl;
+//    }
 
 
 //    ArquivoDocente *arqDocente = new ArquivoDocente("docentes.csv");
