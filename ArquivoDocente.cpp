@@ -42,19 +42,17 @@ void ArquivoDocente::loadDataToMemory(){
 
             pos = line.find(separador);
             aux = line.substr(0, pos);
-            string dataNascimento = aux;
+            time_t dNascimento = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
             line.erase(0, pos + 1);
 
             pos = line.find(separador);
             aux = line.substr(0, pos);
-            string dataIngresso = aux;
+            time_t dIngresso = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
             line.erase(0, pos + 1);
 
             if (line.length()) {
                 cord = true;
             }
-            time_t dNascimento = parseDate(dataNascimento, DATE_FORMAT_PT_BR_SHORT);
-            time_t dIngresso = parseDate(dataIngresso, DATE_FORMAT_PT_BR_SHORT);
             Docente *novoDocente = new Docente(codigo, nome, cord, dNascimento, dIngresso);
             this->docentes.push_back(novoDocente);
         }

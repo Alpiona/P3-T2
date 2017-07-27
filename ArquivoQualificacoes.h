@@ -13,15 +13,17 @@ class RegraPontuacao;
 class Veiculo;
 class ArquivoQualificacoes {
 private:
-    ifstream entrada;
-    vector<Qualis*> qualificacoes;
-    vector<Veiculo*> veiculos;
-    vector<Veiculo*> novosVeiculos;
+    std::ifstream entrada;
+    std::vector<Qualis*> qualificacoes;
+    std::vector<Veiculo*> veiculos;
+    std::vector<Veiculo*> novosVeiculos;
     RegraPontuacao regra;
 public:
-    ArquivoQualificacoes(std::string pathname, vector<Veiculo*> veiculos);
+    ArquivoQualificacoes(std::string pathname, std::vector<Veiculo*> veiculos);
     ArquivoQualificacoes(std::string pathname);
     void loadDataToLocalMemory();
+    Veiculo* encontraVeiculo(std::string aux);
+    std::vector<Qualis*> getListaQualis();
 };
 
 

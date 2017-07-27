@@ -5,21 +5,20 @@
 #include <vector>
 #include "Qualis.h"
 
-using namespace std;
-
 class Veiculo {
 private:
-    string sigla;
-    string nome;
+    std::string sigla;
+    std::string nome;
     char tipo;
     double fatorDeImpacto;
-    string ISSN;
-    vector<Qualis> listaQualis;
+    std::string ISSN;
+    std::vector<Qualis*> listaQualis;
 
 public:
     Veiculo();
-    Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, string ISSN);
-    string getSigla();
+    Veiculo(std::string sigla, std::string nome, char tipo, double fatorDeImpacto, std::string ISSN);
+    std::string getSigla();
+    std::vector<Qualis*> getListaQualis();
 };
 
 
