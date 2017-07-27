@@ -10,4 +10,4 @@ Veiculo::Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, st
     this->ISSN = ISSN;
 }
 
-string Veiculo::getNome() {return this->nome;}
+string Veiculo::getSigla() {return this->sigla;}

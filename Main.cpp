@@ -99,9 +99,9 @@ int main() {
 //        cout << aux->getNome() << endl;
 //    }
 
-//    for (vector<Publicacao*>::iterator iterPublicacao = publicacoes.begin(); iterPublicacao != veiculos.end();iterPublicacao++){
-//        Veiculo *aux = veiculos
-//        cout<< aux->getNome() << endl;
+//    for (vector<Publicacao*>::iterator iterPublicacao = publicacoes.begin(); iterPublicacao != publicacoes.end();iterPublicacao++){
+//        Publicacao *aux = *iterPublicacao;
+//        cout << aux->getNome() << endl;
 //    }
 
 //    ArquivoQualificacoes *arqQaulificacoes = new ArquivoQualificacoes("qualis.csv");

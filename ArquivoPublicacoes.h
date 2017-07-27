@@ -9,7 +9,7 @@
 #include "PublicacaoConferecia.h"
 #include "PublicacaoPeriodico.h"
 
-//class Docente;
+class Docente;
 class ArquivoPublicacoes {
 private:
     std::ifstream entrada;
@@ -21,12 +21,13 @@ private:
     Docente isCodigoDocenteValid (std::string codigo);
 
 public:
-    ArquivoPublicacoes(std::string pathname);
     ArquivoPublicacoes(std::string pathname, std::vector<Docente*> docentes, std::vector<Veiculo*> veiculos);
     void loadDataToLocalMemory();
     std::vector<Publicacao*> getPublicacoes();
     void adicionarPubAoAutor (Publicacao p, std::vector<Docente*> autores);
-
+    vector<Docente*> loadListaAutores (string autores);
+    Docente* encontraDocente(string codigo);
+    Veiculo* encontraVeiculo(string veiculo);
 };
 
 

@@ -23,4 +23,4 @@ bool Docente::isOverSixty(time_t ano) {
 
 }
 
-string Docente::getNome() {return this->nome;}
+string Docente::getCodigo() {return this->codigo;}
