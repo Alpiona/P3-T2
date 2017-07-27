@@ -9,11 +9,12 @@
 
 class ArquivoVeiculo {
 private:
-    vector<Veiculo*> veiculos;
-    std::ofstream entrada;
+    std::vector<Veiculo*> veiculos;
+    std::ifstream entrada;
 
 public:
     ArquivoVeiculo(std::string pathname);
+    std::vector<Veiculo*> getVeiculos();
     void loadDataToMemory();
 };
 

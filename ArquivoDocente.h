@@ -11,14 +11,13 @@ class Docente;
 class ArquivoDocente {
 private:
     vector<Docente*> docentes;
-    string pathname;
     ifstream entrada;
 
 public:
     ArquivoDocente();
     ArquivoDocente(std::string pathname);
     void loadDataToMemory();
-    vector<Docente> getDocentes();
+    vector<Docente*> getDocentes();
     void addDocente (Docente docente);
 };
 

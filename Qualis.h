@@ -2,18 +2,20 @@
 #define P3_T2_QUALIS_H
 
 #include <string>
-
-using namespace std;
+#include <array>
+#include "RegraPontuacao.h"
 
 class Qualis {
 private:
     int ano;
     int pontuacao;
-    string qualis;
-    string categoriasQualis[8] = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
+    std::string qualis;
+    std::array<std::string,8> categoriasQualis;
+    RegraPontuacao regra;
 
 public:
-    Qualis(int ano, string qualis);
+    Qualis(int ano, std::string qualis);
+    void setRegra (RegraPontuacao regra);
     void setPontuacao(int pontuacao);
     bool isValidQualis();
 };

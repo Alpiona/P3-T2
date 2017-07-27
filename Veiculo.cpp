@@ -1,5 +1,7 @@
 #include "Veiculo.h"
 
+using namespace std;
+
 Veiculo::Veiculo(){}
 
 Veiculo::Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, string ISSN) {
@@ -9,3 +11,7 @@ Veiculo::Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, st
     this->fatorDeImpacto = fatorDeImpacto;
     this->ISSN = ISSN;
 }
+
+string Veiculo::getSigla() {return this->sigla;}
+
+vector<Qualis*> Veiculo::getListaQualis() {return this->listaQualis;}

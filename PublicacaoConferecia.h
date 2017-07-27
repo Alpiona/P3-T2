@@ -13,7 +13,7 @@ private:
     string local;
 
 public:
-    PublicacaoConferecia(int numero, int ano, int pgInicial, int pgFinal, string titulo, Veiculo veiculo, string local, vector<Docente*> autores);
+    PublicacaoConferecia(int numero, int ano, int pgInicial, int pgFinal, string titulo, Veiculo* veiculo, string local, vector<Docente*> autores);
 };
 
 

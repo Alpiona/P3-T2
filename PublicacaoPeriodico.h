@@ -12,7 +12,7 @@ private:
 
 public:
     PublicacaoPeriodico(int numero, int ano, int volume, int pgInicial, int pgFinal, string titulo,
-                        Veiculo veiculo, vector<Docente*> autores);
+                        Veiculo* veiculo, vector<Docente*> autores);
 };
 
 

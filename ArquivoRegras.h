@@ -10,7 +10,7 @@ class RegraPontuacao;
 class ArquivoRegras {
 private:
     std::ifstream entrada;
-    RegraPontuacao regra;
+    RegraPontuacao* regra;
 
 public:
     ArquivoRegras(std::string pathname);
