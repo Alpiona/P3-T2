@@ -1,13 +1,13 @@
 #include "ArquivoDocente.h"
 #include "ExceptionFile.h"
 #include "util/DateUtils.h"
+#include "util/StringUtils.h"
+#include "util/Tokenizer.h"
 
 using namespace std;
 using namespace cpp_util;
 
-ArquivoDocente::ArquivoDocente() {
-
-}
+ArquivoDocente::ArquivoDocente() {}
 
 ArquivoDocente::ArquivoDocente(string pathname) {
 
@@ -22,37 +22,29 @@ ArquivoDocente::ArquivoDocente(string pathname) {
 
 void ArquivoDocente::loadDataToMemory(){
     string line;
-    string aux;
-    size_t pos = 0;
-    string separador = ";";
     getline(this->entrada, line);
     while (getline(this->entrada,line)) {
         if (line != "") {
             bool cord = false;
+            Tokenizer tokenizer(line,';');
+            vector<string> dados = tokenizer.remaining();
+            for(unsigned i = 0;i<dados.size();i++) {
+                dados[i] = trim(dados[i]);
+            }
 
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string codigo = aux;
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string nome = aux;
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            time_t dNascimento = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            time_t dIngresso = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
-            line.erase(0, pos + 1);
-
-            if (line.length()) {
+            string codigo = dados[0];
+            string nome = dados[1];
+            if(dados.size() > 4 && dados[4].compare("X") == 0) {
                 cord = true;
             }
+
+            // CRIAR EXCEÇÃO
+            time_t dNascimento, dIngresso;
+            if(validDate(dados[2],DATE_FORMAT_PT_BR_SHORT) && validDate(dados[3],DATE_FORMAT_PT_BR_SHORT)) {
+                dNascimento = parseDate(dados[2],DATE_FORMAT_PT_BR_SHORT);
+                dIngresso = parseDate(dados[3],DATE_FORMAT_PT_BR_SHORT);
+            }
+
             Docente *novoDocente = new Docente(codigo, nome, cord, dNascimento, dIngresso);
             this->docentes.push_back(novoDocente);
         }

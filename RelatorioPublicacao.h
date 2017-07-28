@@ -16,7 +16,7 @@ class RelatorioPublicacao {
     vector<Publicacao*> ordenarPorQualis(string qualis);
     int getMaiorAno(vector<Publicacao*> auxPubs);
     vector<Publicacao*> ordenarPorAno(int maiorAno, int ano, vector<Publicacao*> pubPorQualis);
-    static vector<string> getSortedStringArray(vector<string> array);
+    vector<string> getSortedStringArray(vector<string> array);
 public:
     RelatorioPublicacao(string pathname, vector<Publicacao*> publicacoes);
     static vector<Publicacao*> ordenarPorSigla(vector<Publicacao*> auxPubs);

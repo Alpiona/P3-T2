@@ -2,6 +2,8 @@
 #include "ExceptionFile.h"
 #include "util/DateUtils.h"
 #include "util/NumberUtils.h"
+#include "util/Tokenizer.h"
+#include "util/StringUtils.h"
 #include <locale>
 
 using namespace std;
@@ -28,9 +30,44 @@ void ArquivoRegras::loadDataToMemory(){
 
     string line;
     getline(this->entrada,line);
-    getline(this->entrada,line);
 
     while(getline(this->entrada,line)) {
+        vector<string> todosQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
+        Tokenizer splitter(line,';');
+        vector<string> dados = splitter.remaining();
+        for(unsigned i=0;i<dados.size();i++) {
+            dados[i] = trim(dados[i]);
+        }
+        time_t dataInicioVigencia, dataFimVigencia;
+        if(validDate(dados[0],DATE_FORMAT_PT_BR_SHORT) && validDate(dados[1],DATE_FORMAT_PT_BR_SHORT)) {
+            dataInicioVigencia = parseDate(dados[0],DATE_FORMAT_PT_BR_SHORT);
+            dataFimVigencia = parseDate(dados[0],DATE_FORMAT_PT_BR_SHORT);
+        }
+
+        Tokenizer qualisToken(dados[2],',');
+        vector<string> categoriasQualis = qualisToken.remaining();
+        for(unsigned i=0;i<categoriasQualis.size();i++) {
+            categoriasQualis[i] = trim(categoriasQualis[i]);
+        }
+
+        Tokenizer pontToken(dados[3],',');
+        vector<string> auxString = pontToken.remaining();
+        for(unsigned i=0;i<auxString.size();i++) {
+            auxString[i] = trim(auxString[i]);
+        }
+
+        vector<int> pontuacaoQualis;
+
+        for(string auxQualis : categoriasQualis) {
+            if(auxQualis != NULL) {
+                unsigned i = 0;
+               for(string realQualis : todosQualis) {
+                   if(auxQualis.compare(realQualis) == 0) {
+                       //pontuacaoQualis[i] = stoi(auxString[])
+                   }
+               }
+            }
+        }
 
     }
     string aux;

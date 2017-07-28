@@ -55,30 +55,34 @@ int main() {
         cout << e.errorMessage() << endl;
     }
 
+
     try {
         arqRegras = new ArquivoRegras("regras.csv");
         regra = arqRegras->getRegra("2017");
     } catch(ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
+//
+////    for(Veiculo *v : veiculos) {
+////        cout << v->getSigla() << endl;
+////    }
+//
+//    try {
+//        arqQualificacoes = new ArquivoQualificacoes("qualis.csv", veiculos);
+//        arqQualificacoes->setRegra(regra);
+//        listaQualis = arqQualificacoes->getListaQualis();
+//    } catch(ExceptionFile e) {
+//        cout << e.errorMessage() << endl;
+//    }
 
-
-    try {
-        arqQualificacoes = new ArquivoQualificacoes("qualis.csv", veiculos);
-        //arqQualificacoes->setRegra(regra);
-        listaQualis = arqQualificacoes->getListaQualis();
-    } catch(ExceptionFile e) {
-        cout << e.errorMessage() << endl;
-    }
-
-    cout << "gente???" << endl;
+    //cout << "gente???" << endl;
 
 
     //Gerando Relatórios
 
-    for(Publicacao* publicacao : publicacoes) {
-        cout << publicacao->getNome() << endl;
-    }
+//    for(Publicacao* publicacao : publicacoes) {
+//        cout << publicacao->getNome() << endl;
+//    }
 
     //RelatorioPublicacao* relatorioPublicacao = new RelatorioPublicacao("relatoriopublicacao.csv", publicacoes);
     //relatorioPublicacao->write();

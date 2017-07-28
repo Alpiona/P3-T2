@@ -1,7 +1,13 @@
+#include <histedit.h>
 #include "ArquivoVeiculo.h"
 #include "ExceptionFile.h"
+#include "util/Tokenizer.h"
+#include "util/StringUtils.h"
+#include "util/NumberUtils.h"
+#include "util/NumPunctPTBR.h"
 
 using namespace std;
+using namespace cpp_util;
 
 ArquivoVeiculo::ArquivoVeiculo(string pathname) {
 
@@ -16,43 +22,27 @@ ArquivoVeiculo::ArquivoVeiculo(string pathname) {
 
 void ArquivoVeiculo::loadDataToMemory() {
     string line;
-    string aux;
-    size_t pos = 0;
-    string separador = ";";
     getline(this->entrada, line);
     while (getline(this->entrada, line)) {
         if (line != "") {
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string sigla = aux;
-            line.erase(0, pos + 1);
 
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string nome = aux;
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            char tipo = aux.at(0);
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            double impacto = atof(aux.c_str());  //transforma em float mas n pega depois da virgula
-            line.erase(0, pos + 1);
-
-            Veiculo *novoVeiculo;
-            if (line.length() > 0) {
-                pos = line.find(separador);
-                aux = line.substr(0, pos);
-                string ISSN = aux;
-                line.erase(0, pos + 1);
-                novoVeiculo = new Veiculo(sigla, nome, tipo, impacto, ISSN);
-            } else {
-                string ISSN = "";
-                novoVeiculo = new Veiculo(sigla, nome, tipo, impacto, ISSN);
+            cpp_util::Tokenizer tok(line,';');
+            vector<string> dados = tok.remaining();
+            for(unsigned i=0;i<dados.size();i++) {
+                dados[i] = trim(dados[i]);
             }
+
+            string sigla = dados[0];
+            string nome = dados[1];
+            char tipo = dados[2].at(0);
+            double impacto = parseDouble(dados[3],cpp_util::LOCALE_PT_BR);
+
+            string ISSN = "";
+            if(dados.size()>4) {
+                ISSN = dados[4];
+            }
+
+            Veiculo* novoVeiculo = new Veiculo(sigla, nome, tipo, impacto, ISSN);
             this->veiculos.push_back(novoVeiculo);
         }
     }

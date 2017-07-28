@@ -1,9 +1,13 @@
 #include "ArquivoPublicacoes.h"
 #include "ExceptionFile.h"
+#include "util/StringUtils.h"
+#include "util/Tokenizer.h"
+
 #include <string>
 #include <iostream>
 #include <fstream>
 using namespace std;
+using namespace cpp_util;
 
 ArquivoPublicacoes::ArquivoPublicacoes(string pathname, vector<Docente*> docentes, vector<Veiculo*> veiculos ){
     this->entrada.open(pathname);
@@ -18,91 +22,57 @@ ArquivoPublicacoes::ArquivoPublicacoes(string pathname, vector<Docente*> docente
 
 void ArquivoPublicacoes::loadDataToLocalMemory() {
     string line;
-    string aux;
-    size_t pos = 0;
-    string separador = ";";
     getline(this->entrada, line);
     while (getline(this->entrada, line)) {
         if (line != "") {
 
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            int ano = atoi(aux.c_str());
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string veiculo = aux;
-            Veiculo *auxVeiculo = encontraVeiculo(veiculo);
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string titulo = aux;
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string autores = aux;
-            vector<Docente*> listaAutores = loadListaAutores(autores);
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            int numero = atoi(aux.c_str());
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            int volume = 0;
-            if (aux.length() >= 0) {
-                volume = atoi(aux.c_str());
+            cpp_util::Tokenizer splitter(line,';');
+            vector<string> dados = splitter.remaining();
+            for(unsigned i=0;i<dados.size();i++) {
+                dados[i] = trim(dados[i]);
             }
-            line.erase(0, pos + 1);
+            int ano = stoi(dados[0]);
+            string siglaVeiculo = dados[1];
+            string titulo = dados[2];
+            int numero = stoi(dados[4]);
+            int pgInicial = stoi(dados[7]);
+            int pgFinal = stoi(dados[8]);
 
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            string local;
-            if (aux.length() >= 0) {
-                local = aux;
-            }
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            int pgInicial = atoi(aux.c_str());
-            line.erase(0, pos + 1);
-
-            pos = line.find(separador);
-            aux = line.substr(0, pos);
-            int pgFinal = atoi(aux.c_str());
-            line.erase(0, pos + 1);
-
-            if (volume == 0){
-                PublicacaoConferecia *novaPublicacao = new PublicacaoConferecia(numero,ano,pgInicial, pgFinal, titulo,auxVeiculo,local,listaAutores);
-                this->publicacoes.push_back(novaPublicacao);
-            }
-            else if (local.compare("") == 0){
-                PublicacaoPeriodico *novaPublicacao = new PublicacaoPeriodico(numero,ano, volume,pgInicial,pgFinal,titulo,auxVeiculo,listaAutores);
-                this->publicacoes.push_back(novaPublicacao);
+            // CRIAR EXCEÇÃO
+            Veiculo* v = encontraVeiculo(siglaVeiculo);
+            if(v==NULL) {
+                cout << "veiculo nulo" << endl;
+            } else {
+                Tokenizer autoresToken(dados[3],',');
+                vector<string> codigoAutores = autoresToken.remaining();
+                for(unsigned i=0;i<codigoAutores.size();i++) {
+                    codigoAutores[i] = trim(codigoAutores[i]);
+                }
+                vector<Docente*> autores = loadListaAutores(codigoAutores);
+                if(dados[6].compare("") != 0) {
+                    string local = dados[6];
+                    PublicacaoConferecia* publicacaoConferecia = new PublicacaoConferecia(numero, ano, pgInicial, pgFinal, titulo, v, local, autores);
+                    publicacoes.push_back(publicacaoConferecia);
+                }
+                if(dados[5].compare("") != 0) {
+                    int volume = stoi(dados[5]);
+                    PublicacaoPeriodico* publicacaoPeriodico = new PublicacaoPeriodico(numero, ano, volume, pgInicial, pgFinal, titulo, v, autores);
+                    publicacoes.push_back(publicacaoPeriodico);
+                }
             }
         }
     }
 }
 
-vector<Publicacao*> ArquivoPublicacoes::getPublicacoes() {return this->publicacoes;}
+vector<Publicacao*> ArquivoPublicacoes::getPublicacoes() { return this->publicacoes; }
 
-vector<Docente*> ArquivoPublicacoes::loadListaAutores(string autores) {
+vector<Docente*> ArquivoPublicacoes::loadListaAutores(vector<string> autores) {
     vector<Docente*> listaAutores;
     Docente *novoAutor;
-    while (autores.find(",") != string::npos) {
-        int pos = autores.find(",");
-        string aux = autores.substr(0, pos);
-        autores.erase(0, pos + 1);
-        novoAutor = encontraDocente(aux);
+    for(string codigo: autores) {
+        novoAutor = encontraDocente(codigo);
+        listaAutores.push_back(novoAutor);
     }
-    listaAutores.push_back(novoAutor);
-    novoAutor = encontraDocente(autores);
     return listaAutores;
 }
 
@@ -117,10 +87,9 @@ Docente* ArquivoPublicacoes::encontraDocente(string codigo) {
 }
 
 Veiculo* ArquivoPublicacoes::encontraVeiculo(string sigla) {
-    for (vector<Veiculo*>::iterator veiculo = this->veiculos.begin(); veiculo != this->veiculos.end();veiculo++){
-        Veiculo *aux = *veiculo;
-        if (aux->getSigla().compare(sigla) == 0){
-            return aux;
+    for(Veiculo* v: veiculos) {
+        if(v->getSigla().compare(sigla) == 0) {
+            return v;
         }
     }
     return NULL;
