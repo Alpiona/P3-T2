@@ -10,6 +10,7 @@
 #include "ArquivoRegras.h"
 #include "ArquivoVeiculo.h"
 #include "ExceptionFile.h"
+#include "RelatorioPublicacao.h"
 
 using namespace std;
 
@@ -19,9 +20,13 @@ vector<Docente*> docentes;
 vector<Publicacao*> publicacoes;
 vector<Qualis*> listaQualis;
 vector<Veiculo*> veiculos;
-RegraPontuacao regra;
+RegraPontuacao* regra;
 
-void lerArquivos() {
+
+
+int main() {
+
+
     ArquivoDocente *arqDocente;
     ArquivoVeiculo *arqVeiculo;
     ArquivoPublicacoes *arqPublicacoes;
@@ -42,6 +47,7 @@ void lerArquivos() {
         cout << e.errorMessage() << endl;
     }
 
+
     try {
         arqPublicacoes = new ArquivoPublicacoes("publicacoes.csv", docentes, veiculos);
         publicacoes = arqPublicacoes->getPublicacoes();
@@ -51,61 +57,31 @@ void lerArquivos() {
 
     try {
         arqRegras = new ArquivoRegras("regras.csv");
-//        regra = arqRegras->getRegra();
+        regra = arqRegras->getRegra("2017");
     } catch(ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
 
+
     try {
         arqQualificacoes = new ArquivoQualificacoes("qualis.csv", veiculos);
-//        arqQualificacoes->setRegra(regra);
+        //arqQualificacoes->setRegra(regra);
         listaQualis = arqQualificacoes->getListaQualis();
     } catch(ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
-}
 
-int main() {
-
-    lerArquivos();
+    cout << "gente???" << endl;
 
 
-//    ArquivoDocente *arqDocente = new ArquivoDocente("docentes.csv");
-//    docentes = arqDocente->getDocentes();
-//    for (vector<Docente*>::iterator docente = docentes.begin(); docente != docentes.end();docente++){
-//        Docente *aux = *docente;
-//        cout<< aux->getNome() << endl;
-//    }
+    //Gerando Relatórios
 
-//    ArquivoVeiculo *arquivoVeiculo = new ArquivoVeiculo("veiculos.csv");
-//    veiculos = arquivoVeiculo->getVeiculos();
-//    for(unsigned i = 0; i < veiculos.size(); i++) {
-//        Veiculo *auxVeiculo = veiculos.at(i);
-//        cout << auxVeiculo->getNome() << endl;
-//    }
+    for(Publicacao* publicacao : publicacoes) {
+        cout << publicacao->getNome() << endl;
+    }
 
-//    ArquivoVeiculo *arqVeiculo = new ArquivoVeiculo("veiculos.csv");
-//    veiculos = arqVeiculo->getVeiculos();
-//    for (vector<Veiculo*>::iterator veiculo = veiculos.begin(); veiculo != veiculos.end();veiculo++){
-//        Veiculo *aux = *veiculo;
-//        cout<< aux->getNome() << endl;
-//    }
+    //RelatorioPublicacao* relatorioPublicacao = new RelatorioPublicacao("relatoriopublicacao.csv", publicacoes);
+    //relatorioPublicacao->write();
 
-//    ArquivoPublicacoes *arqPublicacoes = new ArquivoPublicacoes("publicacoes.csv");
-//    publicacoes = arqPublicacoes->getPublicacoes();
-//
-//    for(unsigned i=0;i<veiculos.size();i++) {
-//        Veiculo *aux = veiculos.at(i);
-//        cout << aux->getNome() << endl;
-//    }
-
-//    for (vector<Publicacao*>::iterator iterPublicacao = publicacoes.begin(); iterPublicacao != publicacoes.end();iterPublicacao++){
-//        Publicacao *aux = *iterPublicacao;
-//        cout << aux->getNome() << endl;
-//    }
-
-//    ArquivoQualificacoes *arqQaulificacoes = new ArquivoQualificacoes("qualis.csv");
-
-//    ArquivoRegras *arqRegras = new ArquivoRegras("regras.csv");
     return 0;
 }

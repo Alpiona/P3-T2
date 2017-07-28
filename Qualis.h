@@ -11,11 +11,12 @@ private:
     int pontuacao;
     std::string qualis;
     std::array<std::string,8> categoriasQualis;
-    RegraPontuacao regra;
+    RegraPontuacao *regra;
 
 public:
     Qualis(int ano, std::string qualis);
-    void setRegra (RegraPontuacao regra);
+    void setRegra (RegraPontuacao *regra);
+    std::string getQualis();
     void setPontuacao(int pontuacao);
     bool isValidQualis();
 };

@@ -5,16 +5,19 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <vector>
 
 class RegraPontuacao;
 class ArquivoRegras {
 private:
     std::ifstream entrada;
-    RegraPontuacao* regra;
+    std::vector<RegraPontuacao*> regras;
 
 public:
     ArquivoRegras(std::string pathname);
+    RegraPontuacao* getRegra(std::string ano);
     void loadDataToMemory();
+    void addRegra(RegraPontuacao* regraPontuacao);
 };
 
 

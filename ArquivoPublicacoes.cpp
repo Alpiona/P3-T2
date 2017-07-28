@@ -9,10 +9,11 @@ ArquivoPublicacoes::ArquivoPublicacoes(string pathname, vector<Docente*> docente
     this->entrada.open(pathname);
     if(!(this->entrada.is_open())){
         throw ExceptionFile();
+    } else {
+        this->docentes = docentes;
+        this->veiculos = veiculos;
+        loadDataToLocalMemory();
     }
-    this->docentes = docentes;
-    this->veiculos = veiculos;
-    loadDataToLocalMemory();
 }
 
 void ArquivoPublicacoes::loadDataToLocalMemory() {

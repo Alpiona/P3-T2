@@ -17,12 +17,14 @@ private:
     std::vector<Qualis*> qualificacoes;
     std::vector<Veiculo*> veiculos;
     std::vector<Veiculo*> novosVeiculos;
-    RegraPontuacao regra;
+    RegraPontuacao* regra;
 public:
     ArquivoQualificacoes(std::string pathname, std::vector<Veiculo*> veiculos);
     ArquivoQualificacoes(std::string pathname);
     void loadDataToLocalMemory();
+    void setRegra(RegraPontuacao *regraPontuacao);
     Veiculo* encontraVeiculo(std::string aux);
+    void colocarPontuacaoQualis();
     std::vector<Qualis*> getListaQualis();
 };
 

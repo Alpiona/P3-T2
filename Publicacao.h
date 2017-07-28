@@ -24,7 +24,11 @@ public:
     Publicacao();
     Publicacao(int numero, int ano, int pgInicial, int pgFinal, Veiculo* veiculo, vector<Docente*> autores, string titulo);
     void setQualis (string qualis);
+    int getAno();
+    string getQualis();
+    string getFormatListaAutores();
     string getNome();
+    Veiculo* getVeiculo();
 };
 
 

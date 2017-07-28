@@ -8,8 +8,9 @@ ArquivoQualificacoes::ArquivoQualificacoes(string pathname, vector<Veiculo*> vei
     this->entrada.open(pathname);
     if (!(this->entrada.is_open())){
         throw ExceptionFile();
+    } else {
+        loadDataToLocalMemory();
     }
-    loadDataToLocalMemory();
 }
 
 void ArquivoQualificacoes::loadDataToLocalMemory() {
@@ -54,3 +55,14 @@ Veiculo* ArquivoQualificacoes::encontraVeiculo(string aux) {
 }
 
 vector<Qualis*> ArquivoQualificacoes::getListaQualis() {return this->qualificacoes;}
+
+void ArquivoQualificacoes::setRegra(RegraPontuacao* regraPontuacao) {
+    this->regra = regraPontuacao;
+
+}
+
+void ArquivoQualificacoes::colocarPontuacaoQualis() {
+    for(unsigned i=0;i<this->qualificacoes.size();i++) {
+        this->qualificacoes.at(i)->setPontuacao(this->regra->valorQualis(qualificacoes.at(i)->getQualis()));
+    }
+}

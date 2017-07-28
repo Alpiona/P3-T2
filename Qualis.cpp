@@ -7,4 +7,9 @@ Qualis::Qualis(int ano, string qualis) {
     this->qualis = qualis;
 }
 
-void Qualis::setRegra(RegraPontuacao regra) {this->regra = regra;}
+void Qualis::setRegra(RegraPontuacao *regra) {this->regra = regra;}
+void Qualis::setPontuacao(int pontuacao) {this->pontuacao = pontuacao;}
+
+string Qualis::getQualis() {
+    return this->qualis;
+}

@@ -19,6 +19,8 @@ bool Docente::isCoordenador() {
     return this->coordenador;
 }
 
+string Docente::getNome() {return this->nome;}
+
 bool Docente::isOverSixty(time_t ano) {
 
 }

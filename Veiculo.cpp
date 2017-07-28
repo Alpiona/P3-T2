@@ -13,5 +13,7 @@ Veiculo::Veiculo(string sigla, string nome, char tipo, double fatorDeImpacto, st
 }
 
 string Veiculo::getSigla() {return this->sigla;}
+string Veiculo::getNome() {return this->nome;}
+double Veiculo::getFatorImpacto() {return this->fatorDeImpacto;}
 
 vector<Qualis*> Veiculo::getListaQualis() {return this->listaQualis;}

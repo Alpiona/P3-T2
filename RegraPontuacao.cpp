@@ -1,7 +1,10 @@
+#include <iostream>
 #include "RegraPontuacao.h"
-#include <array>
+#include "util/DateUtils.h"
 
 using namespace std;
+using namespace cpp_util;
+
 
 RegraPontuacao::RegraPontuacao() {}
 
@@ -14,6 +17,13 @@ RegraPontuacao::RegraPontuacao(array<int,8> pontuacaoQualis, double multiplicado
     this->multiplicador = multiplicador;
     this->qtdAnos = qtdAnos;
     this->pontuacaoMinima = pontuacaoMinima;
+}
+
+string RegraPontuacao::getAno() {
+    string dInicio = formatDate(this->dataInicio,DATE_FORMAT_PT_BR_SHORT);
+    string ano = dInicio.substr(6,9);
+    cout << ano << endl;
+    return ano;
 }
 
 int RegraPontuacao::valorQualis(string qualis) {

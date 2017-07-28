@@ -19,6 +19,7 @@ public:
     RegraPontuacao();
     RegraPontuacao(std::array<int,8> pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima, time_t dataInicio, time_t dataFinal);
     int valorQualis(std::string qualis);
+    std::string getAno();
 
 };
 

@@ -18,6 +18,8 @@ public:
     Veiculo();
     Veiculo(std::string sigla, std::string nome, char tipo, double fatorDeImpacto, std::string ISSN);
     std::string getSigla();
+    std::string getNome();
+    double getFatorImpacto();
     std::vector<Qualis*> getListaQualis();
 };
 

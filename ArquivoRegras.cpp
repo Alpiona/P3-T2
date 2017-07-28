@@ -15,24 +15,42 @@ ArquivoRegras::ArquivoRegras(string pathname) {
     else{loadDataToMemory();}
 }
 
-void ArquivoRegras::loadDataToMemory(){
+RegraPontuacao* ArquivoRegras::getRegra(string ano) {
 
+    for(unsigned i=0;i<this->regras.size();i++) {
+        if(regras.at(i)->getAno().compare(ano) == 0) {
+            return regras.at(i);
+        }
+    }
+}
+
+void ArquivoRegras::loadDataToMemory(){
 
     string line;
     getline(this->entrada,line);
     getline(this->entrada,line);
+
+    while(getline(this->entrada,line)) {
+
+    }
     string aux;
     size_t pos = 0;
     string separador = ";";
 
     pos = line.find(separador);
     aux = line.substr(0, pos);
-    time_t dInicio = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+    time_t dInicio;
+    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
+        dInicio = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+    }
     line.erase(0, pos + 1);
 
     pos = line.find(separador);
     aux = line.substr(0, pos);
-    time_t dFinal= parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+    time_t dFinal;
+    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
+        dFinal = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+    }
     line.erase(0, pos + 1);
 
     pos = line.find(separador);
@@ -47,8 +65,8 @@ void ArquivoRegras::loadDataToMemory(){
     string pontos = aux;
     line.erase(0, pos + 1);
 
-    std::array<std::string,8> categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
-    std::array<int,8> pontuacaoQualis = {0,0,0,0,0,0,0,0};
+    array<string,8> categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
+    array<int,8> pontuacaoQualis = {0,0,0,0,0,0,0,0};
     int unicoPonto;
     int i =0;
     while (qualis.find(",") != string::npos) {
@@ -97,5 +115,7 @@ void ArquivoRegras::loadDataToMemory(){
     aux = line.substr(0, pos);
     int pontosMinimos = atoi(aux.c_str());
 
-    this->regra = new RegraPontuacao(pontuacaoQualis, multiplicador, anos, pontosMinimos, dInicio, dFinal);
+    RegraPontuacao* regraPontuacao = new RegraPontuacao(pontuacaoQualis, multiplicador, anos, pontosMinimos, dInicio, dFinal);
+
+    this->regras.push_back(regraPontuacao);
 }
