@@ -10,6 +10,9 @@ private:
     double nArtigosPorDocente;
 public:
     EstatisticaQualis(std::string qualis, int nArtigos, double nArtigosPorDocente);
+    string getQualis();
+    int getNArtigos();
+    double returnArtigosPorDocente();
 };
 
 class RelatorioEstatisticas {
@@ -21,7 +24,7 @@ private:
 public:
     RelatorioEstatisticas(string pathname, std::vector<Publicacao*> publicacoes);
     void getEstatisticaAllQualis();
-    void getEstatisticasUmQualis(std::string qualis);
+    void getEstatisticasDeQualis(std::string qualis);
     void write();
 };
 

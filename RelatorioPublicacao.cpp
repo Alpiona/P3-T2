@@ -8,6 +8,7 @@
 #include <set>
 #include <vector>
 #include <algorithm>
+#include <iomanip>
 
 RelatorioPublicacao::RelatorioPublicacao(string pathname, vector<Publicacao*> publicacoes) {
     this->pathname = pathname;
@@ -140,7 +141,6 @@ vector<Publicacao *> RelatorioPublicacao::ordenar() {
 
 void RelatorioPublicacao::write() {
     vector<Publicacao*> pOrdenadas = this->ordenar();
-//    vector<Publicacao*> pOrdenadas = this->publicacoes;
 
 //    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
     ofstream relatorioCSV;
