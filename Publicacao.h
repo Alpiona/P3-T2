@@ -27,6 +27,8 @@ public:
     int getAno();
     string getQualis();
     string getFormatListaAutores();
+    vector<Docente*> getAutores();
+    bool operator==(Publicacao* const& p2);
     string getNome();
     Veiculo* getVeiculo();
 };

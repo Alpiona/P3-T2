@@ -17,6 +17,7 @@ string Publicacao::getNome() {return this->titulo;}
 int Publicacao::getAno() {return this->ano;}
 string Publicacao::getQualis() {return this->qualis;}
 void Publicacao::setQualis(string qualis) {this->qualis = qualis; }
+vector<Docente*> Publicacao::getAutores() {return this->autores;}
 
 string Publicacao::getFormatListaAutores() {
     int i = 0;
@@ -30,6 +31,11 @@ string Publicacao::getFormatListaAutores() {
         i++;
     }
     return nomes;
+}
+
+bool Publicacao::operator==(Publicacao* const& p2) {
+    //return p1.getAno() == p2.getAno();
+    return ((this->getNome().compare(p2->getNome())));
 }
 
 Veiculo* Publicacao::getVeiculo() {return this->veiculo;}

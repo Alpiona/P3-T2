@@ -5,6 +5,7 @@
 #include "RelatorioPublicacao.h"
 #include <fstream>
 #include <iostream>
+#include <set>
 
 RelatorioPublicacao::RelatorioPublicacao(string pathname, vector<Publicacao*> publicacoes) {
     this->pathname = pathname;
@@ -114,17 +115,18 @@ vector<Publicacao *> RelatorioPublicacao::ordenar() {
                 auxPubs.push_back(okok);
             }
         }
-
         for(Publicacao* okok: auxPubs) {
-
             listaOrdenada.push_back(okok);
         }
     }
+
+    //listaOrdenada.erase(unique(listaOrdenada.begin(), listaOrdenada.end()), listaOrdenada.end());
     return listaOrdenada;
 }
 
 void RelatorioPublicacao::write() {
     vector<Publicacao*> pOrdenadas = this->ordenar();
+    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
     ofstream relatorioCSV;
     relatorioCSV.open(pathname);
     if(!relatorioCSV.is_open()) {
@@ -135,8 +137,27 @@ void RelatorioPublicacao::write() {
     for(Publicacao* p: pOrdenadas) {
         relatorioCSV << p->getAno() << ";" << p->getVeiculo()->getSigla() << ";" << p->getVeiculo()->getNome() << ";";
         relatorioCSV << p->getQualis() << ";" << p->getVeiculo()->getFatorImpacto() << ";" << p->getNome() << ";";
-        relatorioCSV << p->getFormatListaAutores() << endl;
+        int sizeAutores = p->getAutores().size();
+        if(sizeAutores == 1) {
+            relatorioCSV << p->getAutores()[0]->getNome() << '\n';
+        } else {
+            int iterador = 0;
+            for(Docente* d: p->getAutores()) {
+                if(iterador != sizeAutores-1) {
+                    relatorioCSV << d->getNome() << ",";
+                } else {
+                    relatorioCSV << d->getNome() << '\n';
+                }
+                iterador++;
+            }
+        }
     }
 
-    cout << "Relatório gerado" << endl;
+    cout << "Relatório Publicação gerado com alguns erros" << endl;
 }
+
+
+//
+//bool findAndDelete(Publicacao* publicacao,vector<Publicacao*>) {
+//
+//}

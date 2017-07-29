@@ -55,7 +55,6 @@ int main() {
         cout << e.errorMessage() << endl;
     }
 
-
     try {
         arqRegras = new ArquivoRegras("regras.csv");
         regra = arqRegras->getRegra("2017");
