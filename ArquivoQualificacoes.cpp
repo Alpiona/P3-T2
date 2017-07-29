@@ -1,4 +1,4 @@
-#include <histedit.h>
+//#include <histedit.h>
 #include "ArquivoQualificacoes.h"
 #include "ExceptionFile.h"
 #include "util/StringUtils.h"

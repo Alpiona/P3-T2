@@ -6,6 +6,8 @@
 #include <fstream>
 #include <iostream>
 #include <set>
+#include <vector>
+#include <algorithm>
 
 RelatorioPublicacao::RelatorioPublicacao(string pathname, vector<Publicacao*> publicacoes) {
     this->pathname = pathname;
@@ -44,7 +46,6 @@ vector<Publicacao *> RelatorioPublicacao::ordenarPorAno(int maiorAno, int ano, v
             auxSiglas.push_back(auxPub);
         }
     }
-
     auxSiglas = this->ordenarPorSigla(auxSiglas);
 
     return auxSiglas;
@@ -54,10 +55,22 @@ vector<Publicacao *> RelatorioPublicacao::ordenarPorSigla(vector<Publicacao *> a
     vector<Publicacao*> returnedSiglaAndTitulo;
     vector<string> auxSiglasString;
     for(Publicacao* auxPub: auxPubs) {
-        auxSiglasString.push_back(auxPub->getVeiculo()->getSigla());
+        bool tem = false;
+        if (auxSiglasString.empty()){
+            auxSiglasString.push_back(auxPub->getVeiculo()->getSigla());
+        }
+        else {
+            for (string auxString : auxSiglasString){
+                if (auxString.compare(auxPub->getVeiculo()->getSigla())==0){
+                    tem = true;
+                }
+            }
+            if (!tem){
+                auxSiglasString.push_back(auxPub->getVeiculo()->getSigla());
+            }
+        }
     }
     sort(begin(auxSiglasString), end(auxSiglasString));//this->getSortedStringArray(auxSiglasString);
-
     for(string sigla : auxSiglasString) {
         vector<Publicacao*> auxSiglasHS;
         for(Publicacao* auxPub : auxPubs) {
@@ -78,6 +91,7 @@ vector<Publicacao *> RelatorioPublicacao::ordenarPorSigla(vector<Publicacao *> a
             for(Publicacao* auxPub : auxSiglasHS) {
                 if(titulo.compare(auxPub->getNome()) == 0) {
                     vetorTituloOrdenado.push_back(auxPub);
+                    break;
                 }
             }
         }
@@ -126,7 +140,9 @@ vector<Publicacao *> RelatorioPublicacao::ordenar() {
 
 void RelatorioPublicacao::write() {
     vector<Publicacao*> pOrdenadas = this->ordenar();
-    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
+//    vector<Publicacao*> pOrdenadas = this->publicacoes;
+
+//    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
     ofstream relatorioCSV;
     relatorioCSV.open(pathname);
     if(!relatorioCSV.is_open()) {

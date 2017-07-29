@@ -1,4 +1,4 @@
-#include <histedit.h>
+//#include <histedit.h>
 #include "ArquivoVeiculo.h"
 #include "ExceptionFile.h"
 #include "util/Tokenizer.h"

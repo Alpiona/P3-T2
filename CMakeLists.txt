@@ -11,5 +11,5 @@ set(SOURCE_FILES Main.cpp
         Veiculo.cpp Veiculo.h ArquivoVeiculo.cpp ArquivoVeiculo.h
         RegraPontuacao.cpp RegraPontuacao.h ArquivoRegras.cpp ArquivoRegras.h ExceptionFile.cpp ExceptionFile.h
         util/DateUtils.cpp util/DateUtils.h util/NumberUtils.cpp util/NumberUtils.h util/NumPunctPTBR.cpp util/NumPunctPTBR.h util/StringUtils.cpp util/StringUtils.h
-        util/Tokenizer.cpp util/Tokenizer.h RelatorioPublicacao.cpp RelatorioPublicacao.h)
+        util/Tokenizer.cpp util/Tokenizer.h RelatorioPublicacao.cpp RelatorioPublicacao.h RelatorioEstatisticas.cpp RelatorioEstatisticas.h)
 add_executable(P3_T2 ${SOURCE_FILES})
