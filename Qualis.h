@@ -18,6 +18,7 @@ public:
     void setRegra (RegraPontuacao *regra);
     std::string getQualis();
     void setPontuacao(int pontuacao);
+    int getPontuacao();
     bool isValidQualis();
 };
 

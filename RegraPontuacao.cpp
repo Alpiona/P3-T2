@@ -8,7 +8,7 @@ using namespace cpp_util;
 
 RegraPontuacao::RegraPontuacao() {}
 
-RegraPontuacao::RegraPontuacao(array<int,8> pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima,
+RegraPontuacao::RegraPontuacao(vector<int> pontuacaoQualis, double multiplicador, int qtdAnos, int pontuacaoMinima,
                                time_t dataInicio, time_t dataFinal) {
     this->categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
     this->dataInicio = dataInicio;

@@ -13,3 +13,7 @@ void Qualis::setPontuacao(int pontuacao) {this->pontuacao = pontuacao;}
 string Qualis::getQualis() {
     return this->qualis;
 }
+
+int Qualis::getPontuacao() {
+    return this->pontuacao;
+}

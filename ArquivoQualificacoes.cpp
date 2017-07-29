@@ -40,20 +40,27 @@ void ArquivoQualificacoes::loadDataToLocalMemory() {
             string siglaVeiculo = tokens[1];
             string qualis = tokens[2];
 
+            //int pontuacaoDaQualis = this->regra->valorQualis(qualis);
             Qualis *novoQualis = new Qualis(ano, qualis);
             qualificacoes.push_back(novoQualis);
-            Veiculo *veiculo = this->encontraVeiculo(siglaVeiculo); // CRIAR EXCEÇÃO SIGLA VALIDA
-            veiculo->getListaQualis().push_back(novoQualis); // CRIAR EXCEÇÃO VALIDA QUALIS
-            novosVeiculos.push_back(veiculo);
+            for(unsigned i=0;i<veiculos.size();i++) {
+                if(veiculos[i]->getSigla().compare(siglaVeiculo)==0) {
+                    veiculos[i]->addQualis(novoQualis);
+                }
+            }
         }
     }
 }
+
+//vector<Veiculo*> ArquivoQualificacoes::getNovosVeiculos() {
+//    return this->novosVeiculos;
+//}
 
 Veiculo* ArquivoQualificacoes::encontraVeiculo(string sigla) {
     Veiculo* veiculo = NULL;
     for(Veiculo* v: this->veiculos) {
         if(v->getSigla().compare(sigla) == 0) {
-            return v;
+            veiculo = v;
         }
     }
     return veiculo;
@@ -68,6 +75,6 @@ void ArquivoQualificacoes::setRegra(RegraPontuacao* regraPontuacao) {
 
 void ArquivoQualificacoes::colocarPontuacaoQualis() {
     for(unsigned i=0;i<this->qualificacoes.size();i++) {
-        this->qualificacoes.at(i)->setPontuacao(this->regra->valorQualis(qualificacoes.at(i)->getQualis()));
+        this->qualificacoes[i]->setPontuacao(this->regra->valorQualis(qualificacoes[i]->getQualis()));
     }
 }

@@ -18,10 +18,9 @@ ArquivoRegras::ArquivoRegras(string pathname) {
 }
 
 RegraPontuacao* ArquivoRegras::getRegra(string ano) {
-
     for(unsigned i=0;i<this->regras.size();i++) {
-        if(regras.at(i)->getAno().compare(ano) == 0) {
-            return regras.at(i);
+        if(regras[i]->getAno().compare(ano) == 0) {
+            return regras[i];
         }
     }
 }
@@ -50,109 +49,126 @@ void ArquivoRegras::loadDataToMemory(){
             categoriasQualis[i] = trim(categoriasQualis[i]);
         }
 
-        Tokenizer pontToken(dados[3],',');
-        vector<string> auxString = pontToken.remaining();
+        Tokenizer pontuacaoToken(dados[3],',');
+        vector<string> auxString = pontuacaoToken.remaining();
         for(unsigned i=0;i<auxString.size();i++) {
             auxString[i] = trim(auxString[i]);
         }
 
         vector<int> pontuacaoQualis;
 
-        for(string auxQualis : categoriasQualis) {
-            if(auxQualis != NULL) {
-                unsigned i = 0;
-               for(string realQualis : todosQualis) {
-                   if(auxQualis.compare(realQualis) == 0) {
-                       //pontuacaoQualis[i] = stoi(auxString[])
-                   }
-               }
+        int iteratorPontuacao = 0;
+        for(unsigned i=0;i<todosQualis.size();i++) {
+            if (todosQualis[i].compare(categoriasQualis[iteratorPontuacao + 1]) == 0) { iteratorPontuacao++; }
+            int pontuacao;
+            try {
+                pontuacao = stoi(auxString[iteratorPontuacao]);
+            } catch (invalid_argument argument) {
+                cout << argument.what() << endl;
             }
+            pontuacaoQualis.push_back(pontuacao);
         }
 
-    }
-    string aux;
-    size_t pos = 0;
-    string separador = ";";
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    time_t dInicio;
-    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
-        dInicio = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
-    }
-    line.erase(0, pos + 1);
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    time_t dFinal;
-    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
-        dFinal = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
-    }
-    line.erase(0, pos + 1);
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    string qualis = aux;
-    line.erase(0, pos + 1);
-    string unicoQualis;
-
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    string pontos = aux;
-    line.erase(0, pos + 1);
-
-    array<string,8> categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
-    array<int,8> pontuacaoQualis = {0,0,0,0,0,0,0,0};
-    int unicoPonto;
-    int i =0;
-    while (qualis.find(",") != string::npos) {
-        i=0;
-        pos = qualis.find(",");
-        aux = qualis.substr(0, pos);
-        unicoQualis = aux;
-        qualis.erase(0, pos + 1);
-
-        pos = pontos.find(",");
-        aux = pontos.substr(0, pos);
-        unicoPonto = atoi(aux.c_str());
-        pontos.erase(0, pos + 1);
-
-        while (categoriasQualis[i].compare(unicoQualis) != 0) {
-            if (pontuacaoQualis[i] == 0 && i != 0){
-                pontuacaoQualis[i] = pontuacaoQualis[i-1];
-            }
-            i++;
+        double multiplicador = parseDouble(dados[4],LOCALE_PT_BR);
+        int anos;
+        try {
+            anos = stoi(dados[5]);
+        } catch (invalid_argument argument) {
+            cout << argument.what() << endl;
         }
-        pontuacaoQualis[i] = unicoPonto;
-    }
-
-    while (categoriasQualis[i].compare(qualis) != 0) {
-        if (pontuacaoQualis[i] == 0 && i != 0){
-            pontuacaoQualis[i] = pontuacaoQualis[i-1];
+        int pontuacaoMinima;
+        try {
+            pontuacaoMinima = stoi(dados[6]);
+        } catch (invalid_argument argument) {
+            cout << argument.what() << endl;
         }
-        i++;
+
+        RegraPontuacao* regra = new RegraPontuacao(pontuacaoQualis, multiplicador, anos, pontuacaoMinima, dataInicioVigencia, dataFimVigencia);
+        regras.push_back(regra);
     }
-    while (i<8){
-        pontuacaoQualis[i] = atoi(pontos.c_str());
-        i++;
-    }
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    double multiplicador  = atof(aux.c_str()); //pega como float mas n considera a virgula
-    line.erase(0, pos + 1);
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    int anos = atoi(aux.c_str());
-    line.erase(0, pos + 1);
-
-    pos = line.find(separador);
-    aux = line.substr(0, pos);
-    int pontosMinimos = atoi(aux.c_str());
-
-    RegraPontuacao* regraPontuacao = new RegraPontuacao(pontuacaoQualis, multiplicador, anos, pontosMinimos, dInicio, dFinal);
-
-    this->regras.push_back(regraPontuacao);
+//    string aux;
+//    size_t pos = 0;
+//    string separador = ";";
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    time_t dInicio;
+//    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
+//        dInicio = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+//    }
+//    line.erase(0, pos + 1);
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    time_t dFinal;
+//    if(validDate(aux,DATE_FORMAT_PT_BR_SHORT)) {
+//        dFinal = parseDate(aux, DATE_FORMAT_PT_BR_SHORT);
+//    }
+//    line.erase(0, pos + 1);
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    string qualis = aux;
+//    line.erase(0, pos + 1);
+//    string unicoQualis;
+//
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    string pontos = aux;
+//    line.erase(0, pos + 1);
+//
+//    array<string,8> categoriasQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
+//    array<int,8> pontuacaoQualis = {0,0,0,0,0,0,0,0};
+//    int unicoPonto;
+//    int i =0;
+//    while (qualis.find(",") != string::npos) {
+//        i=0;
+//        pos = qualis.find(",");
+//        aux = qualis.substr(0, pos);
+//        unicoQualis = aux;
+//        qualis.erase(0, pos + 1);
+//
+//        pos = pontos.find(",");
+//        aux = pontos.substr(0, pos);
+//        unicoPonto = atoi(aux.c_str());
+//        pontos.erase(0, pos + 1);
+//
+//        while (categoriasQualis[i].compare(unicoQualis) != 0) {
+//            if (pontuacaoQualis[i] == 0 && i != 0){
+//                pontuacaoQualis[i] = pontuacaoQualis[i-1];
+//            }
+//            i++;
+//        }
+//        pontuacaoQualis[i] = unicoPonto;
+//    }
+//
+//    while (categoriasQualis[i].compare(qualis) != 0) {
+//        if (pontuacaoQualis[i] == 0 && i != 0){
+//            pontuacaoQualis[i] = pontuacaoQualis[i-1];
+//        }
+//        i++;
+//    }
+//    while (i<8){
+//        pontuacaoQualis[i] = atoi(pontos.c_str());
+//        i++;
+//    }
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    double multiplicador  = atof(aux.c_str()); //pega como float mas n considera a virgula
+//    line.erase(0, pos + 1);
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    int anos = atoi(aux.c_str());
+//    line.erase(0, pos + 1);
+//
+//    pos = line.find(separador);
+//    aux = line.substr(0, pos);
+//    int pontosMinimos = atoi(aux.c_str());
+//
+//    RegraPontuacao* regraPontuacao = new RegraPontuacao(pontuacaoQualis, multiplicador, anos, pontosMinimos, dInicio, dFinal);
+//
+//    this->regras.push_back(regraPontuacao);
 }

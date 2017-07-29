@@ -20,6 +20,7 @@ public:
     std::string getSigla();
     std::string getNome();
     double getFatorImpacto();
+    void addQualis(Qualis* qualis);
     std::vector<Qualis*> getListaQualis();
 };
 

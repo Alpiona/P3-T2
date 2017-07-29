@@ -35,7 +35,7 @@ void ArquivoVeiculo::loadDataToMemory() {
             string sigla = dados[0];
             string nome = dados[1];
             char tipo = dados[2].at(0);
-            double impacto = parseDouble(dados[3],cpp_util::LOCALE_PT_BR);
+            double impacto = parseDouble(dados[3],LOCALE_PT_BR);
 
             string ISSN = "";
             if(dados.size()>4) {

@@ -96,12 +96,10 @@ vector<string> RelatorioPublicacao::getSortedStringArray(vector<string> array) {
 vector<Publicacao *> RelatorioPublicacao::ordenar() {
     vector<Publicacao*> listaOrdenada;
     for(unsigned i=0;i<this->publicacoes.size();i++) {
-        vector<Qualis *> qualisPossiveis;
+        vector<Qualis *> qualisPossiveis = this->publicacoes[i]->getVeiculo()->getListaQualis();;
         if (qualisPossiveis.size() == 0) {
             cout << "Qualis vazia" << endl;
-        } else {
-            qualisPossiveis = this->publicacoes[i]->getVeiculo()->getListaQualis();
-         }
+        }
         for(unsigned y=0;y<qualisPossiveis.size();y++) {
             this->publicacoes.at(i)->setQualis(qualisPossiveis.at(y)->getQualis());
         }
@@ -122,28 +120,23 @@ vector<Publicacao *> RelatorioPublicacao::ordenar() {
             listaOrdenada.push_back(okok);
         }
     }
-
-
     return listaOrdenada;
 }
 
 void RelatorioPublicacao::write() {
     vector<Publicacao*> pOrdenadas = this->ordenar();
-    for(Publicacao* p: pOrdenadas) {
-        cout << p->getNome() << endl;
+    ofstream relatorioCSV;
+    relatorioCSV.open(pathname);
+    if(!relatorioCSV.is_open()) {
+        cout << "Não criou" << endl;
     }
-//    ofstream relatorioCSV;
-//    relatorioCSV.open(pathname);
-//    if(!relatorioCSV.is_open()) {
-//        cout << "Não criou" << endl;
-//    }
-//
-//    relatorioCSV << FILE_HEDER << endl;
-//    for(Publicacao* p: pOrdenadas) {
-//        relatorioCSV << p->getAno() << ";" << p->getVeiculo()->getSigla() << ";" << p->getVeiculo()->getNome() << ";";
-//        relatorioCSV << p->getQualis() << ";" << p->getVeiculo()->getFatorImpacto() << ";" << p->getNome() << ";";
-//        relatorioCSV << p->getFormatListaAutores() << endl;
-//    }
+
+    relatorioCSV << FILE_HEDER << endl;
+    for(Publicacao* p: pOrdenadas) {
+        relatorioCSV << p->getAno() << ";" << p->getVeiculo()->getSigla() << ";" << p->getVeiculo()->getNome() << ";";
+        relatorioCSV << p->getQualis() << ";" << p->getVeiculo()->getFatorImpacto() << ";" << p->getNome() << ";";
+        relatorioCSV << p->getFormatListaAutores() << endl;
+    }
 
     cout << "Relatório gerado" << endl;
 }
