@@ -12,6 +12,7 @@
 #include "ExceptionFile.h"
 #include "RelatorioPublicacao.h"
 #include "RelatorioEstatisticas.h"
+#include "RelatorioRecredenciamento.h"
 
 using namespace std;
 
@@ -89,6 +90,9 @@ int main() {
 
     RelatorioEstatisticas* relatorioEstatisticas = new RelatorioEstatisticas("relatorioestatistica.csv", publicacoes);
     relatorioEstatisticas->write();
+
+    RelatorioRecredenciamento* relatorioRecredenciamento = new RelatorioRecredenciamento("relatoriorecredenciamento.csv", docentes, regra);
+    relatorioRecredenciamento->write();
 
     return 0;
 }

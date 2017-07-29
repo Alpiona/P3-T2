@@ -22,7 +22,6 @@ RegraPontuacao::RegraPontuacao(vector<int> pontuacaoQualis, double multiplicador
 string RegraPontuacao::getAno() {
     string dInicio = formatDate(this->dataInicio,DATE_FORMAT_PT_BR_SHORT);
     string ano = dInicio.substr(6,9);
-    cout << ano << endl;
     return ano;
 }
 

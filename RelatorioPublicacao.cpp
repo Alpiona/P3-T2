@@ -168,8 +168,6 @@ void RelatorioPublicacao::write() {
             }
         }
     }
-
-    cout << "Relatório Publicação gerado com alguns erros" << endl;
 }
 
 
