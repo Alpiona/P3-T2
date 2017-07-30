@@ -55,7 +55,3 @@ void ArquivoDocente::loadDataToMemory(){
 vector<Docente*> ArquivoDocente::getDocentes(){
     return this->docentes;
 }
-
-void ArquivoDocente::addDocente (Docente docente){
-
-}
