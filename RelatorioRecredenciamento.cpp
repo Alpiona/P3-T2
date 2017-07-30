@@ -12,17 +12,58 @@ RelatorioRecredenciamento::RelatorioRecredenciamento(string pathname, std::vecto
     time(&hoje); //NUMERO DE SEGUNDOS DESDE 00:00 hours, Jan 1, 1970 UTC
 }
 
-bool RelatorioRecredenciamento::ordenaDocentes(Docente* doc1, Docente* doc2) {
-    if (doc1->getNome().compare(doc2->getNome()) < 0)
-        return true;
-    else
-        return false;
-}
-
-long RelatorioRecredenciamento::diferencaDatas(time_t data1, time_t data2) {
-    return (data1-data2);
+void RelatorioRecredenciamento::ordenaDocentes() {
+    vector<string> nomesOrdenados;
+    for (Docente* auxDocente : this->docentes){
+        nomesOrdenados.push_back(auxDocente->getNome());
+    }
+    sort(nomesOrdenados.begin(),nomesOrdenados.end());
+    vector<Docente*> docentesOrdenados;
+    for (string nome : nomesOrdenados){
+        for (Docente* auxDocente : this->docentes){
+            if (auxDocente->getNome().compare(nome) == 0){
+                docentesOrdenados.push_back(auxDocente);
+                break;
+            }
+        }
+    }
+    this->docentes = docentesOrdenados;
 }
 
 void RelatorioRecredenciamento::write() {
-    cout << hoje << " " << (hoje/31622400);
+    ordenaDocentes();
+    ofstream saida;
+    saida.open(this->pathname);
+    if(!saida.is_open()) {
+        cout << "Não criou" << endl;
+    }
+    saida << "Docente;Pontuação;Recredenciado?\n";
+    string especificacao;
+    double pontos;
+    for (Docente* docente : docentes){
+        pontos = 0;
+        especificacao = "Não";
+        for (Publicacao* publicacao : docente->getPublicacoes()){
+            if (publicacao->getVeiculo()->getTipo() == 'P'){
+                pontos += regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+            }
+            else{
+                pontos += regra->valorQualis(publicacao->getQualis());
+            }
+        }
+        if (docente->isCoordenador()){
+            especificacao = "Coordenador";
+        }
+        else if (docente->isOverSixty(hoje)){
+            especificacao = "PPS";
+        }
+        else if (docente->lessThreeYears(hoje)){
+            especificacao = "PPJ";
+        }
+        else if (pontos >= regra->getPontuacaoMinima()){
+            especificacao = "Sim";
+        }
+        saida << docente->getNome() << ";" << pontos << ";" << especificacao << "\n";
+    }
+
 }

@@ -21,4 +21,7 @@ void Veiculo::addQualis(Qualis *qualis) {
         this->listaQualis.push_back(qualis);
     }
 }
+
+char Veiculo::getTipo() {return this->tipo;}
+
 vector<Qualis*> Veiculo::getListaQualis() {return this->listaQualis;}

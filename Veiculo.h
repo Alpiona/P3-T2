@@ -22,6 +22,7 @@ public:
     double getFatorImpacto();
     void addQualis(Qualis* qualis);
     std::vector<Qualis*> getListaQualis();
+    char getTipo();
 };
 
 

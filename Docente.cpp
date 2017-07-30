@@ -19,10 +19,28 @@ bool Docente::isCoordenador() {
     return this->coordenador;
 }
 
+vector<Publicacao*> Docente::getPublicacoes() {return this->publicacoes;}
+
+time_t Docente::getDataIngresso(){return this->dataIngresso;}
+
 string Docente::getNome() {return this->nome;}
 
-bool Docente::isOverSixty(time_t ano) {
+bool Docente::isOverSixty(time_t hoje) {
+    long diferenca = hoje-(this->dataNascimento);
+    if (diferenca >= (86400*365.25*60))
+        return true;
+    else{
+        return false;
+    }
+}
 
+bool Docente::lessThreeYears(time_t hoje) {
+    long diferenca = hoje-(this->dataIngresso);
+    if (diferenca < (86400*365.25*3))
+        return true;
+    else{
+        return false;
+    }
 }
 
 string Docente::getCodigo() {return this->codigo;}

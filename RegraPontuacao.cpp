@@ -33,3 +33,7 @@ int RegraPontuacao::valorQualis(string qualis) {
     }
     return 0;
 }
+
+double RegraPontuacao::getMultiplicador() {return this->multiplicador;}
+
+int RegraPontuacao::getPontuacaoMinima() {return this->pontuacaoMinima;}

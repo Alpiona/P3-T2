@@ -24,7 +24,7 @@ public:
     ArquivoPublicacoes(std::string pathname, std::vector<Docente*> docentes, std::vector<Veiculo*> veiculos);
     void loadDataToLocalMemory();
     std::vector<Publicacao*> getPublicacoes();
-    void adicionarPubAoAutor (Publicacao p, std::vector<Docente*> autores);
+    void adicionarPubAoAutor (Publicacao* p, std::vector<Docente*> autores);
     vector<Docente*> loadListaAutores (std::vector<string> autores);
     Docente* encontraDocente(string codigo);
     Veiculo* encontraVeiculo(string veiculo);

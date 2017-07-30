@@ -2,25 +2,26 @@
 #define P3_T2_DOCENTE_H
 
 #include "Publicacao.h"
-
-using namespace std;
+#include <string>
 
 class Publicacao;
 
 class Docente {
 private:
-    string codigo;
-    string nome;
+    std::string codigo;
+    std::string nome;
     time_t dataNascimento;
     time_t dataIngresso;
     bool coordenador;
-    vector<Publicacao*> publicacoes;
+    std::vector<Publicacao*> publicacoes;
 
 public:
-    Docente(string codigo, string nome, bool coordenador, time_t dataNascimento, time_t dataIngresso);
+    Docente(std::string codigo, std::string nome, bool coordenador, time_t dataNascimento, time_t dataIngresso);
     void adicionarPublicacao(Publicacao *publicacao);
-    string getCodigo();
-    string getNome();
+    std::string getCodigo();
+    std::string getNome();
+    std::vector<Publicacao*> getPublicacoes();
+    time_t getDataIngresso();
     bool isCoordenador();
     bool lessThreeYears(time_t ano);
     bool isOverSixty(time_t ano);

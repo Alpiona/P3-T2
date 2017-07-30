@@ -51,13 +51,15 @@ void ArquivoPublicacoes::loadDataToLocalMemory() {
                 vector<Docente*> autores = loadListaAutores(codigoAutores);
                 if(dados[6].compare("") != 0) {
                     string local = dados[6];
-                    PublicacaoConferecia* publicacaoConferecia = new PublicacaoConferecia(numero, ano, pgInicial, pgFinal, titulo, v, local, autores);
+                    Publicacao* publicacaoConferecia = new PublicacaoConferecia(numero, ano, pgInicial, pgFinal, titulo, v, local, autores);
                     publicacoes.push_back(publicacaoConferecia);
+                    this->adicionarPubAoAutor(publicacaoConferecia, autores);
                 }
                 if(dados[5].compare("") != 0) {
                     int volume = stoi(dados[5]);
-                    PublicacaoPeriodico* publicacaoPeriodico = new PublicacaoPeriodico(numero, ano, volume, pgInicial, pgFinal, titulo, v, autores);
+                    Publicacao* publicacaoPeriodico = new PublicacaoPeriodico(numero, ano, volume, pgInicial, pgFinal, titulo, v, autores);
                     publicacoes.push_back(publicacaoPeriodico);
+                    this->adicionarPubAoAutor(publicacaoPeriodico, autores);
                 }
             }
         }
@@ -65,6 +67,16 @@ void ArquivoPublicacoes::loadDataToLocalMemory() {
 }
 
 vector<Publicacao*> ArquivoPublicacoes::getPublicacoes() { return this->publicacoes; }
+
+void ArquivoPublicacoes::adicionarPubAoAutor(Publicacao* p, vector<Docente*> autores) {
+    for (Docente* autor : autores){
+        for (Docente* docente : this->docentes){
+            if (autor->getCodigo() == docente->getCodigo()){
+                docente->adicionarPublicacao(p);
+            }
+        }
+    }
+}
 
 vector<Docente*> ArquivoPublicacoes::loadListaAutores(vector<string> autores) {
     vector<Docente*> listaAutores;
