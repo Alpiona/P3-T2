@@ -144,6 +144,8 @@ void RelatorioPublicacao::write() {
 
 //    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
     ofstream relatorioCSV;
+    locale mylocale("pt_BR.UTF-8");
+    relatorioCSV.imbue(mylocale);
     relatorioCSV.open(pathname);
     if(!relatorioCSV.is_open()) {
         cout << "Não criou" << endl;
@@ -151,8 +153,8 @@ void RelatorioPublicacao::write() {
 
     relatorioCSV << FILE_HEDER << endl;
     for(Publicacao* p: pOrdenadas) {
-        relatorioCSV << p->getAno() << ";" << p->getVeiculo()->getSigla() << ";" << p->getVeiculo()->getNome() << ";";
-        relatorioCSV << p->getQualis() << ";" << p->getVeiculo()->getFatorImpacto() << ";" << p->getNome() << ";";
+        relatorioCSV << to_string(p->getAno()) << ";" << p->getVeiculo()->getSigla() << ";" << p->getVeiculo()->getNome() << ";";
+        relatorioCSV << p->getQualis() << ";" << setprecision(3) << fixed << p->getVeiculo()->getFatorImpacto() << ";" << p->getNome() << ";";
         int sizeAutores = p->getAutores().size();
         if(sizeAutores == 1) {
             relatorioCSV << p->getAutores()[0]->getNome() << '\n';

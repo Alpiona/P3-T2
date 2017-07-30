@@ -33,6 +33,8 @@ void RelatorioRecredenciamento::ordenaDocentes() {
 void RelatorioRecredenciamento::write() {
     ordenaDocentes();
     ofstream saida;
+    locale mylocale("pt_BR.UTF-8");
+    saida.imbue(mylocale);
     saida.open(this->pathname);
     if(!saida.is_open()) {
         cout << "Não criou" << endl;
@@ -63,7 +65,7 @@ void RelatorioRecredenciamento::write() {
         else if (pontos >= regra->getPontuacaoMinima()){
             especificacao = "Sim";
         }
-        saida << docente->getNome() << ";" << pontos << ";" << especificacao << "\n";
+        saida << docente->getNome() << ";"<< setprecision(1) << fixed  <<  pontos << ";" << especificacao << "\n";
     }
 
 }

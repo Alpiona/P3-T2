@@ -1,9 +1,15 @@
 #include "RelatorioEstatisticas.h"
+#include "util/DateUtils.h"
+#include "util/NumberUtils.h"
+#include "util/Tokenizer.h"
+#include "util/StringUtils.h"
 #include <iostream>
 #include <fstream>
-
+#include <iomanip>
+#include <locale>
 #include <vector>
 
+using namespace cpp_util;
 using namespace std;
 
 EstatisticaQualis::EstatisticaQualis(std::string qualis, int nArtigos, double nArtigosPorDocente){
@@ -45,14 +51,16 @@ void RelatorioEstatisticas::getEstatisticasDeQualis(string qualis) {
 }
 
 void RelatorioEstatisticas::write() {
+    locale mylocale("pt_BR.UTF-8");
     ofstream relatorioCSV;
     relatorioCSV.open(this->pathname);
+    relatorioCSV.imbue(mylocale);
     if(!relatorioCSV.is_open()) {
         cout << "Não criou" << endl;
     }
     relatorioCSV << "Qualis;Qtd. Artigos;Média Artigos / Docente\n";
     for(EstatisticaQualis* e : this->estatisticas){
-        relatorioCSV << e->getQualis() << ";" << e->getNArtigos() << ";" << e->returnArtigosPorDocente()<<endl;
+        relatorioCSV << e->getQualis() << ";" << e->getNArtigos() << ";" << setprecision(2) << fixed << e->returnArtigosPorDocente()<<endl;
     }
 
 }
