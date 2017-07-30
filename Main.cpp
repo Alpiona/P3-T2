@@ -85,13 +85,13 @@ int main() {
 //        cout << publicacao->getNome() << endl;
 //    }
 
-    RelatorioPublicacao* relatorioPublicacao = new RelatorioPublicacao("relatoriopublicacao.csv", publicacoes);
+    RelatorioPublicacao* relatorioPublicacao = new RelatorioPublicacao("2-publicacoes.csv", publicacoes);
     relatorioPublicacao->write();
 
-    RelatorioEstatisticas* relatorioEstatisticas = new RelatorioEstatisticas("relatorioestatistica.csv", publicacoes);
+    RelatorioEstatisticas* relatorioEstatisticas = new RelatorioEstatisticas("3-estatisticas.csv", publicacoes);
     relatorioEstatisticas->write();
 
-    RelatorioRecredenciamento* relatorioRecredenciamento = new RelatorioRecredenciamento("relatoriorecredenciamento.csv", docentes, regra);
+    RelatorioRecredenciamento* relatorioRecredenciamento = new RelatorioRecredenciamento("1-recredenciamento.csv", docentes, regra);
     relatorioRecredenciamento->write();
 
     return 0;

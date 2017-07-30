@@ -35,5 +35,6 @@ int RegraPontuacao::valorQualis(string qualis) {
 }
 
 double RegraPontuacao::getMultiplicador() {return this->multiplicador;}
+int RegraPontuacao::getQtdAnos() {return this->qtdAnos;}
 
 int RegraPontuacao::getPontuacaoMinima() {return this->pontuacaoMinima;}

@@ -51,13 +51,24 @@ void RelatorioRecredenciamento::write() {
         }
         for (Publicacao* publicacao : docente->getPublicacoes()){
             if (publicacao->getVeiculo()->getTipo() == 'P'){
-                pontos += regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                int anoRegra;
+                try {
+                    anoRegra = stoi(regra->getAno());
+                } catch (invalid_argument e) {
+                    cout << e.what() << endl;
+                }
+                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos())) {
+                    if(publicacao->getAno() != anoRegra) {
+                        pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                    }
+                }
+
             }
             else{
                 pontos += regra->valorQualis(publicacao->getQualis());
             }
-            if (docente->getNome().compare("Jason Sudeikis") == 0){
-                cout << publicacao->getVeiculo()->getTipo() << " " << publicacao->getVeiculo()->getSigla()<< " "<< publicacao->getQualis()<< " "<<pontos << " " << publicacao->getNome()<<endl;
+            if (docente->getNome().compare("Jason Sudeikis")==0){
+                cout << publicacao->getVeiculo()->getTipo() << " " << publicacao->getAno() << " " << publicacao->getVeiculo()->getSigla()<< " "<< publicacao->getQualis()<< " "<<pontos << " " << publicacao->getNome()<<endl;
             }
         }
         if (docente->isCoordenador()){

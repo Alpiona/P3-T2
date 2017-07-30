@@ -22,6 +22,7 @@ public:
     int valorQualis(std::string qualis);
     std::string getAno();
     double getMultiplicador();
+    int getQtdAnos();
     int getPontuacaoMinima();
 };
 

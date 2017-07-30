@@ -135,14 +135,12 @@ vector<Publicacao *> RelatorioPublicacao::ordenar() {
         }
     }
 
-    //listaOrdenada.erase(unique(listaOrdenada.begin(), listaOrdenada.end()), listaOrdenada.end());
     return listaOrdenada;
 }
 
 void RelatorioPublicacao::write() {
     vector<Publicacao*> pOrdenadas = this->ordenar();
 
-//    pOrdenadas.erase(unique(begin(pOrdenadas), end(pOrdenadas)), end(pOrdenadas));
     ofstream relatorioCSV;
     locale mylocale("pt_BR.UTF-8");
     relatorioCSV.imbue(mylocale);
@@ -171,9 +169,3 @@ void RelatorioPublicacao::write() {
         }
     }
 }
-
-
-//
-//bool findAndDelete(Publicacao* publicacao,vector<Publicacao*>) {
-//
-//}
