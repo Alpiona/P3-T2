@@ -57,10 +57,8 @@ void RelatorioRecredenciamento::write() {
                 } catch (invalid_argument e) {
                     cout << e.what() << endl;
                 }
-                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos())) {
-                    if(publicacao->getAno() != anoRegra) {
-                        pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
-                    }
+                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos()) && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
+                    pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
                 }
 
             }

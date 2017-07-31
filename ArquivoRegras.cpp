@@ -49,6 +49,26 @@ void ArquivoRegras::loadDataToMemory(){
             categoriasQualis[i] = trim(categoriasQualis[i]);
         }
 
+        try {
+            int isValid = 0;
+            string wrongQualis;
+            for(string auxQualis : categoriasQualis) {
+                for(string atQualis : this->todosQualis) {
+                    if(auxQualis.compare(atQualis)==0) {
+                        isValid = 1;
+                    }
+                }
+                if(isValid == 0) { wrongQualis = auxQualis; break;}
+            }
+            if(isValid == 0) {
+                throw make_pair(dados[0],wrongQualis);
+            }
+        } catch(pair<string, string> e) {
+            ExceptionFile exceptionFile;
+            exceptionFile.qualisDesconhecidoParaRegra(e.first, e.second);
+            exit(1);
+        }
+
         Tokenizer pontuacaoToken(dados[3],',');
         vector<string> auxString = pontuacaoToken.remaining();
         for(unsigned i=0;i<auxString.size();i++) {

@@ -40,8 +40,33 @@ void ArquivoQualificacoes::loadDataToLocalMemory() {
             string siglaVeiculo = tokens[1];
             string qualis = tokens[2];
 
+            try {
+                int isContained = 0;
+                for(Veiculo* auxV : veiculos) {
+                    if(auxV->getSigla().compare(siglaVeiculo)==0) {
+                        isContained = 1;
+                    }
+                }
+                if(isContained == 0) {
+                    throw make_pair(ano, siglaVeiculo);
+                }
+            } catch (pair<int, string> e) {
+                ExceptionFile exceptionFile;
+                exceptionFile.siglaVeiculoNaoDefinidaQualificacao(e.first,e.second);
+                exit(1);
+            }
+
             //int pontuacaoDaQualis = this->regra->valorQualis(qualis);
             Qualis *novoQualis = new Qualis(ano, qualis);
+            try {
+                if (!novoQualis->isValidQualis()) {
+                    throw siglaVeiculo;
+                }
+            } catch (string siglaVeiculo) {
+                ExceptionFile exceptionFile;
+                exceptionFile.qualisDesconhecido(siglaVeiculo,ano,qualis);
+                exit(1);
+            }
             qualificacoes.push_back(novoQualis);
             for(unsigned i=0;i<veiculos.size();i++) {
                 if(veiculos[i]->getSigla().compare(siglaVeiculo)==0) {

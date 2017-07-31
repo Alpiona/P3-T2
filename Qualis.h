@@ -11,6 +11,7 @@ private:
     int pontuacao;
     std::string qualis;
     std::array<std::string,8> categoriasQualis;
+    std::vector<std::string> todosQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};;
     RegraPontuacao *regra;
 
 public:

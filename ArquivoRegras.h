@@ -12,6 +12,7 @@ class ArquivoRegras {
 private:
     std::ifstream entrada;
     std::vector<RegraPontuacao*> regras;
+    std::vector<std::string> todosQualis = {"A1", "A2", "B1", "B2", "B3", "B4", "B5", "C"};
 
 public:
     ArquivoRegras(std::string pathname);

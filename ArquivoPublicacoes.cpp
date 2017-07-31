@@ -39,14 +39,45 @@ void ArquivoPublicacoes::loadDataToLocalMemory() {
             int pgFinal = stoi(dados[8]);
 
             // CRIAR EXCEÇÃO
+            try {
+                int isContained = 0;
+                for(Veiculo* auxV : veiculos) {
+                    if (auxV->getSigla().compare(siglaVeiculo)==0) {
+                        isContained = 1;
+                    }
+                }
+                if(isContained == 0) {
+                    throw std::make_pair(siglaVeiculo,titulo);
+                }
+            } catch(std::pair<string,string> e) {
+                ExceptionFile exc;
+                exc.siglaVeiculoNaoDefinido(e.second,e.first);
+                exit(1);
+            }
+
             Veiculo* v = encontraVeiculo(siglaVeiculo);
             if(v==NULL) {
-                cout << "veiculo nulo" << endl;
+                //cout << "veiculo nulo" << endl;
             } else {
                 Tokenizer autoresToken(dados[3],',');
                 vector<string> codigoAutores = autoresToken.remaining();
                 for(unsigned i=0;i<codigoAutores.size();i++) {
                     codigoAutores[i] = trim(codigoAutores[i]);
+                }
+                try {
+                    for(string codigo : codigoAutores) {
+                        int isDocContained = 0;
+                        for (Docente *docente : docentes) {
+                            if(docente->getCodigo().compare(codigo)==0) {
+                                isDocContained = 1;
+                            }
+                        }
+                        if(isDocContained == 0) {throw make_pair(titulo,codigo);}
+                    }
+                } catch (pair<string,string> e) {
+                    ExceptionFile exceptionFile;
+                    exceptionFile.docenteIndefinidoParaPublicacao(e.second,e.first);
+                    exit(1);
                 }
                 vector<Docente*> autores = loadListaAutores(codigoAutores);
                 if(dados[6].compare("") != 0) {
@@ -85,6 +116,7 @@ vector<Docente*> ArquivoPublicacoes::loadListaAutores(vector<string> autores) {
         novoAutor = encontraDocente(codigo);
         listaAutores.push_back(novoAutor);
     }
+
     return listaAutores;
 }
 

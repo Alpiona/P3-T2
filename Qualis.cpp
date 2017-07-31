@@ -17,3 +17,13 @@ string Qualis::getQualis() {
 int Qualis::getPontuacao() {
     return this->pontuacao;
 }
+
+bool Qualis::isValidQualis() {
+    bool isContained = false;
+    for(string qualis : todosQualis) {
+        if(this->qualis.compare(qualis)==0) {
+            isContained = true;
+        }
+    }
+    return isContained;
+}

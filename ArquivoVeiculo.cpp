@@ -35,6 +35,15 @@ void ArquivoVeiculo::loadDataToMemory() {
             string sigla = dados[0];
             string nome = dados[1];
             char tipo = dados[2].at(0);
+            try {
+                if(tipo != 'P' && tipo != 'C') {
+                    throw make_pair(sigla, tipo);
+                }
+            } catch(pair<string, char> e) {
+                ExceptionFile exceptionFile;
+                exceptionFile.tipoVeiculoNaoDefinido(e.first, e.second);
+                exit(1);
+            }
             double impacto = parseDouble(dados[3],LOCALE_PT_BR);
 
             string ISSN = "";

@@ -15,8 +15,13 @@ public:
     ExceptionFile();
     const string errorMessage() const;
     void docenteRepetido(std::string codigo);
-
-
+    void docenteIndefinidoParaPublicacao(string codigo, string titulo);
+    void veiculoRepetido(string ISSN);
+    void qualisDesconhecido(string vSigla, int ano, string qualis);
+    void qualisDesconhecidoParaRegra(string ano, string qualis);
+    void siglaVeiculoNaoDefinido(string titulo, string sigla);
+    void siglaVeiculoNaoDefinidaQualificacao(int ano, string sigla);
+    void tipoVeiculoNaoDefinido(string sigla, char tipo);
 };
 
 #endif //P3_T2_EXCEPTIONFILE_H
