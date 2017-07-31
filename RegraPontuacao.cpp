@@ -25,6 +25,8 @@ string RegraPontuacao::getAno() {
     return ano;
 }
 
+time_t RegraPontuacao::getDataFinal(){return this->dataFinal;}
+
 int RegraPontuacao::valorQualis(string qualis) {
     for (int i =0; i<8; i++){
         if (this->categoriasQualis[i].compare(qualis) == 0){

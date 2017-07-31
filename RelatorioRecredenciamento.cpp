@@ -69,10 +69,10 @@ void RelatorioRecredenciamento::write() {
         if (docente->isCoordenador()){
             especificacao = "Coordenador";
         }
-        else if (docente->isOverSixty(hoje)){
+        else if (docente->isOverSixty(regra->getDataFinal())){
             especificacao = "PPS";
         }
-        else if (docente->lessThreeYears(hoje)){
+        else if (docente->lessThreeYears(regra->getDataFinal())){
             especificacao = "PPJ";
         }
         else if (pontos >= regra->getPontuacaoMinima()){
