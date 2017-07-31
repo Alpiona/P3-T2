@@ -34,6 +34,16 @@ void ArquivoDocente::loadDataToMemory(){
             }
 
             string codigo = dados[0];
+            try {
+                for (Docente *auxDoc : this->docentes) {
+                    if (codigo.compare(auxDoc->getCodigo()) == 0) {
+                        throw (codigo);
+                    }
+                }
+            } catch (string codigo){
+                ExceptionFile e;
+                e.docenteRepetido(codigo);
+            }
             string nome = dados[1];
             if(dados.size() > 4 && dados[4].compare("X") == 0) {
                 cord = true;

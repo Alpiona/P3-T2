@@ -14,6 +14,8 @@ class ExceptionFile: public exception {
 public:
     ExceptionFile();
     const string errorMessage() const;
+    void docenteRepetido(std::string codigo);
+
 
 };
 

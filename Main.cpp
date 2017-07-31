@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
 
 
     Argumento* argumento = new Argumento(argc, argv);
-
+    ExceptionFile e;
     ArquivoDocente *arqDocente;
     ArquivoVeiculo *arqVeiculo;
     ArquivoPublicacoes *arqPublicacoes;
