@@ -33,6 +33,25 @@ void ArquivoVeiculo::loadDataToMemory() {
             }
 
             string sigla = dados[0];
+
+            try {
+                int isContained = 0;
+                string wrongSigla;
+                for(Veiculo* auxV : veiculos) {
+                    if (auxV->getSigla().compare(sigla)==0) {
+                        isContained = 1;
+                    }
+                    if(isContained==1){ wrongSigla = sigla;}
+                }
+                if(isContained==1) {
+                    throw sigla;
+                }
+
+            } catch (string sigla) {
+                ExceptionFile exceptionFile;
+                exceptionFile.veiculoRepetido(sigla);
+                exit(1);
+            }
             string nome = dados[1];
             char tipo = dados[2].at(0);
             try {
