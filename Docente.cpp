@@ -38,7 +38,7 @@ bool Docente::isOverSixty(time_t hoje) {
 
 bool Docente::lessThreeYears(time_t hoje) {
     long diferenca = hoje-(this->dataIngresso);
-    cout<<diferenca<< " " << hoje << " " << this->dataIngresso<<" "<< (long)(86400*365.25*3)<< endl;
+    //cout<<diferenca<< " " << hoje << " " << this->dataIngresso<<" "<< (long)(86400*365.25*3)<< endl;
     if (diferenca < (86400*365.25*3))
         return true;
     else{

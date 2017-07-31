@@ -43,7 +43,7 @@ void ArquivoDocente::loadDataToMemory(){
             } catch (string codigo){
                 ExceptionFile e;
                 e.docenteRepetido(codigo);
-                exit(1);
+                ////(1);
             }
             string nome = dados[1];
             if(dados.size() > 4 && dados[4].compare("X") == 0) {
