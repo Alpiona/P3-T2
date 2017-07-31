@@ -65,9 +65,6 @@ void RelatorioRecredenciamento::write() {
             else{
                 pontos += regra->valorQualis(publicacao->getQualis());
             }
-//            if (docente->getNome().compare("Jason Sudeikis")==0){
-//                cout << publicacao->getVeiculo()->getTipo() << " " << publicacao->getAno() << " " << publicacao->getVeiculo()->getSigla()<< " "<< publicacao->getQualis()<< " "<<pontos << " " << publicacao->getNome()<<endl;
-//            }
         }
         if (docente->isCoordenador()){
             especificacao = "Coordenador";
