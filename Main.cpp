@@ -13,6 +13,7 @@
 #include "RelatorioPublicacao.h"
 #include "RelatorioEstatisticas.h"
 #include "RelatorioRecredenciamento.h"
+#include "Argumento.h"
 
 using namespace std;
 
@@ -26,8 +27,10 @@ RegraPontuacao* regra;
 
 
 
-int main() {
+int main(int argc, char* argv[]) {
 
+
+    Argumento* argumento = new Argumento(argc, argv);
 
     ArquivoDocente *arqDocente;
     ArquivoVeiculo *arqVeiculo;
@@ -36,14 +39,14 @@ int main() {
     ArquivoRegras *arqRegras; // implementar getRegra
 
     try {
-        arqDocente = new ArquivoDocente("docentes.csv");
+        arqDocente = new ArquivoDocente(argumento->get("-d"));
         docentes = arqDocente->getDocentes();
     } catch (ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
 
     try {
-        arqVeiculo = new ArquivoVeiculo("veiculos.csv");
+        arqVeiculo = new ArquivoVeiculo(argumento->get("-v"));
         veiculos = arqVeiculo->getVeiculos();
     } catch( ExceptionFile e) {
         cout << e.errorMessage() << endl;
@@ -51,25 +54,21 @@ int main() {
 
 
     try {
-        arqPublicacoes = new ArquivoPublicacoes("publicacoes.csv", docentes, veiculos);
+        arqPublicacoes = new ArquivoPublicacoes(argumento->get("-p"), docentes, veiculos);
         publicacoes = arqPublicacoes->getPublicacoes();
     } catch (ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
 
     try {
-        arqRegras = new ArquivoRegras("regras.csv");
-        regra = arqRegras->getRegra("2017");
+        arqRegras = new ArquivoRegras(argumento->get("-r"));
+        regra = arqRegras->getRegra(argumento->get("-a"));
     } catch(ExceptionFile e) {
         cout << e.errorMessage() << endl;
     }
-//
-////    for(Veiculo *v : veiculos) {
-////        cout << v->getSigla() << endl;
-////    }
-//
+
     try {
-        arqQualificacoes = new ArquivoQualificacoes("qualis.csv", veiculos);
+        arqQualificacoes = new ArquivoQualificacoes(argumento->get("-q"), veiculos);
         arqQualificacoes->setRegra(regra);
         listaQualis = arqQualificacoes->getListaQualis();
     } catch(ExceptionFile e) {
@@ -96,3 +95,4 @@ int main() {
 
     return 0;
 }
+

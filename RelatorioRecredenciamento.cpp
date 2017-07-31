@@ -45,10 +45,10 @@ void RelatorioRecredenciamento::write() {
     for (Docente* docente : docentes){
         pontos = 0;
         especificacao = "Não";
-        if (docente->getNome().compare("Jason Sudeikis") == 0){
-            cout << docente->getCodigo()<< " " << docente->getNome()<<endl;
-            cout << "TIPO; SIGLA; QUALIS; PONTUACAO TOTAL; TITULO\n";
-        }
+//        if (docente->getNome().compare("Jason Sudeikis") == 0){
+//            cout << docente->getCodigo()<< " " << docente->getNome()<<endl;
+//            cout << "TIPO; SIGLA; QUALIS; PONTUACAO TOTAL; TITULO\n";
+//        }
         for (Publicacao* publicacao : docente->getPublicacoes()){
             if (publicacao->getVeiculo()->getTipo() == 'P'){
                 int anoRegra;
@@ -67,9 +67,9 @@ void RelatorioRecredenciamento::write() {
             else{
                 pontos += regra->valorQualis(publicacao->getQualis());
             }
-            if (docente->getNome().compare("Jason Sudeikis")==0){
-                cout << publicacao->getVeiculo()->getTipo() << " " << publicacao->getAno() << " " << publicacao->getVeiculo()->getSigla()<< " "<< publicacao->getQualis()<< " "<<pontos << " " << publicacao->getNome()<<endl;
-            }
+//            if (docente->getNome().compare("Jason Sudeikis")==0){
+//                cout << publicacao->getVeiculo()->getTipo() << " " << publicacao->getAno() << " " << publicacao->getVeiculo()->getSigla()<< " "<< publicacao->getQualis()<< " "<<pontos << " " << publicacao->getNome()<<endl;
+//            }
         }
         if (docente->isCoordenador()){
             especificacao = "Coordenador";
