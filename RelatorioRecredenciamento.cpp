@@ -73,8 +73,13 @@ void RelatorioRecredenciamento::write() {
                         pontuacaoQualis = auxQ->getPontuacao();
                     }
                 }
+
                 if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
-                    pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
+                    if(pontuacaoQualis == 0) {
+                        pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                    } else {
+                        pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
+                    }
                 }
 //                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos()) && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
 //                    pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
@@ -91,8 +96,11 @@ void RelatorioRecredenciamento::write() {
                     }
                 }
                 if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
-
-                    pontos = pontos + pontuacaoQualis;
+                    if(pontuacaoQualis == 0) {
+                        pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                    } else {
+                        pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
+                    }
                 }
                 //pontos += regra->valorQualis(publicacao->getQualis());
             }
