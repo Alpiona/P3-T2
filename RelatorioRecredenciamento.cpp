@@ -97,9 +97,9 @@ void RelatorioRecredenciamento::write() {
                 }
                 if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
                     if(pontuacaoQualis == 0) {
-                        pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                        pontos = pontos + regra->valorQualis(publicacao->getQualis());
                     } else {
-                        pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
+                        pontos = pontos + pontuacaoQualis;
                     }
                 }
                 //pontos += regra->valorQualis(publicacao->getQualis());
