@@ -88,6 +88,9 @@ void ArquivoRegras::loadDataToMemory(){
             }
             pontuacaoQualis.push_back(pontuacao);
         }
+        for(int pon : pontuacaoQualis) {
+            cout << pon << endl;
+        }
 
         double multiplicador = parseDouble(dados[4],LOCALE_PT_BR);
         int anos;
@@ -97,6 +100,7 @@ void ArquivoRegras::loadDataToMemory(){
             cout << argument.what() << endl;
         }
         int pontuacaoMinima;
+
         try {
             pontuacaoMinima = stoi(dados[6]);
         } catch (invalid_argument argument) {

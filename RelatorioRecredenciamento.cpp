@@ -5,9 +5,10 @@
 #include <ctime>
 
 RelatorioRecredenciamento::RelatorioRecredenciamento(string pathname, std::vector<Docente*> docentes,
-                                                     RegraPontuacao* regra) {
+                                                     RegraPontuacao* regra, vector<Qualis*> qualificacoes) {
     this->docentes = docentes;
     this->pathname = pathname;
+    this->qualificacoes = qualificacoes;
     this->regra = regra;
     time(&hoje); //NUMERO DE SEGUNDOS DESDE 00:00 hours, Jan 1, 1970 UTC
 }
@@ -49,21 +50,51 @@ void RelatorioRecredenciamento::write() {
 //            cout << docente->getCodigo()<< " " << docente->getNome()<<endl;
 //            cout << "TIPO; SIGLA; QUALIS; PONTUACAO TOTAL; TITULO\n";
 //        }
+        int anoRegra;
+        int anoMinimo = anoRegra - regra->getQtdAnos();
+        try {
+            anoRegra = stoi(regra->getAno());
+        } catch (invalid_argument e) {
+            cout << e.what() << endl;
+        }
         for (Publicacao* publicacao : docente->getPublicacoes()){
             if (publicacao->getVeiculo()->getTipo() == 'P'){
-                int anoRegra;
-                try {
-                    anoRegra = stoi(regra->getAno());
-                } catch (invalid_argument e) {
-                    cout << e.what() << endl;
+
+
+                //cout << anoMinimo << endl;
+//                if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra) {
+//                    pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+//                }
+                string siglaVeiculo = publicacao->getVeiculo()->getSigla();
+                int anoPublicacao = publicacao->getAno();
+                int pontuacaoQualis;
+                for(Qualis* auxQ : qualificacoes) {
+                    if (auxQ->getAno() == anoPublicacao && auxQ->getSiglaVeiculo().compare(siglaVeiculo)==0) {
+                        pontuacaoQualis = auxQ->getPontuacao();
+                    }
                 }
-                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos()) && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
-                    pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+                if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
+                    pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
                 }
+//                if(publicacao->getAno() >= (anoRegra - regra->getQtdAnos()) && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
+//                    pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
+//                }
 
             }
             else{
-                pontos += regra->valorQualis(publicacao->getQualis());
+                string siglaVeiculo = publicacao->getVeiculo()->getSigla();
+                int anoPublicacao = publicacao->getAno();
+                int pontuacaoQualis;
+                for(Qualis* auxQ : qualificacoes) {
+                    if (auxQ->getAno() == anoPublicacao && auxQ->getSiglaVeiculo().compare(siglaVeiculo)==0) {
+                        pontuacaoQualis = auxQ->getPontuacao();
+                    }
+                }
+                if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
+
+                    pontos = pontos + pontuacaoQualis;
+                }
+                //pontos += regra->valorQualis(publicacao->getQualis());
             }
         }
         if (docente->isCoordenador()){

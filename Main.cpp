@@ -75,6 +75,10 @@ int main(int argc, char* argv[]) {
         cout << e.errorMessage() << endl;
     }
 
+    for(Qualis* q : listaQualis) {
+        cout << q->getQualis() << " " << q->getPontuacao() << endl;
+    }
+
     //cout << "gente???" << endl;
 
 
@@ -90,7 +94,7 @@ int main(int argc, char* argv[]) {
     RelatorioEstatisticas* relatorioEstatisticas = new RelatorioEstatisticas("3-estatisticas.csv", publicacoes);
     relatorioEstatisticas->write();
 
-    RelatorioRecredenciamento* relatorioRecredenciamento = new RelatorioRecredenciamento("1-recredenciamento.csv", docentes, regra);
+    RelatorioRecredenciamento* relatorioRecredenciamento = new RelatorioRecredenciamento("1-recredenciamento.csv", docentes, regra, listaQualis);
     relatorioRecredenciamento->write();
 
     return 0;

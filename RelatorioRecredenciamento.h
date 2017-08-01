@@ -12,10 +12,11 @@ class RelatorioRecredenciamento {
 private:
     std::vector<Docente*> docentes;
     std::string pathname;
+    std::vector<Qualis*> qualificacoes;
     RegraPontuacao* regra;
     time_t hoje;
 public:
-    RelatorioRecredenciamento (string pathname, std::vector<Docente*> docentes, RegraPontuacao* regra);
+    RelatorioRecredenciamento (string pathname, std::vector<Docente*> docentes, RegraPontuacao* regra, vector<Qualis*> qualificacoes);
     void ordenaDocentes();
     void write();
 };

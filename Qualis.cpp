@@ -2,9 +2,10 @@
 
 using namespace std;
 
-Qualis::Qualis(int ano, string qualis) {
+Qualis::Qualis(int ano, string qualis, string sigla) {
     this->ano = ano;
     this->qualis = qualis;
+    this->siglaVeiculo = sigla;
 }
 
 void Qualis::setRegra(RegraPontuacao *regra) {this->regra = regra;}
@@ -17,6 +18,12 @@ string Qualis::getQualis() {
 int Qualis::getPontuacao() {
     return this->pontuacao;
 }
+
+string Qualis::getSiglaVeiculo() {
+    return this->siglaVeiculo;
+}
+
+int Qualis::getAno() { return this->ano; }
 
 bool Qualis::isValidQualis() {
     bool isContained = false;

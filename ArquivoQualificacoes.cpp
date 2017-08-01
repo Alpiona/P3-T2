@@ -57,7 +57,7 @@ void ArquivoQualificacoes::loadDataToLocalMemory() {
             }
 
             //int pontuacaoDaQualis = this->regra->valorQualis(qualis);
-            Qualis *novoQualis = new Qualis(ano, qualis);
+            Qualis *novoQualis = new Qualis(ano, qualis, siglaVeiculo);
             try {
                 if (!novoQualis->isValidQualis()) {
                     throw siglaVeiculo;
