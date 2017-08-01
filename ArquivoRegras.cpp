@@ -88,9 +88,6 @@ void ArquivoRegras::loadDataToMemory(){
             }
             pontuacaoQualis.push_back(pontuacao);
         }
-        for(int pon : pontuacaoQualis) {
-            cout << pon << endl;
-        }
 
         double multiplicador = parseDouble(dados[4],LOCALE_PT_BR);
         int anos;

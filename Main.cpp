@@ -75,18 +75,14 @@ int main(int argc, char* argv[]) {
         cout << e.errorMessage() << endl;
     }
 
-    for(Qualis* q : listaQualis) {
-        cout << q->getQualis() << " " << q->getPontuacao() << endl;
-    }
+
 
     //cout << "gente???" << endl;
 
 
     //Gerando Relatórios
 
-//    for(Publicacao* publicacao : publicacoes) {
-//        cout << publicacao->getNome() << endl;
-//    }
+
 
     RelatorioPublicacao* relatorioPublicacao = new RelatorioPublicacao("2-publicacoes.csv", publicacoes);
     relatorioPublicacao->write();
