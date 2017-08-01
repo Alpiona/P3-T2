@@ -51,12 +51,13 @@ void RelatorioRecredenciamento::write() {
 //            cout << "TIPO; SIGLA; QUALIS; PONTUACAO TOTAL; TITULO\n";
 //        }
         int anoRegra;
-        int anoMinimo = anoRegra - regra->getQtdAnos();
+
         try {
             anoRegra = stoi(regra->getAno());
         } catch (invalid_argument e) {
             cout << e.what() << endl;
         }
+        int anoMinimo = anoRegra - regra->getQtdAnos();
         for (Publicacao* publicacao : docente->getPublicacoes()){
             if (publicacao->getVeiculo()->getTipo() == 'P'){
 
