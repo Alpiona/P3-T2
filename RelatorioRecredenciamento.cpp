@@ -67,7 +67,7 @@ void RelatorioRecredenciamento::write() {
 //                }
                 string siglaVeiculo = publicacao->getVeiculo()->getSigla();
                 int anoPublicacao = publicacao->getAno();
-                int pontuacaoQualis;
+                int pontuacaoQualis = 1000;
                 for(Qualis* auxQ : qualificacoes) {
                     if (auxQ->getAno() == anoPublicacao && auxQ->getSiglaVeiculo().compare(siglaVeiculo)==0) {
                         pontuacaoQualis = auxQ->getPontuacao();
@@ -75,7 +75,7 @@ void RelatorioRecredenciamento::write() {
                 }
 
                 if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
-                    if(pontuacaoQualis == 0) {
+                    if(pontuacaoQualis == 1000) {
                         pontos = pontos + regra->valorQualis(publicacao->getQualis()) * regra->getMultiplicador();
                     } else {
                         pontos = pontos + pontuacaoQualis * regra->getMultiplicador();
@@ -89,14 +89,14 @@ void RelatorioRecredenciamento::write() {
             else{
                 string siglaVeiculo = publicacao->getVeiculo()->getSigla();
                 int anoPublicacao = publicacao->getAno();
-                int pontuacaoQualis;
+                int pontuacaoQualis = 1000;
                 for(Qualis* auxQ : qualificacoes) {
                     if (auxQ->getAno() == anoPublicacao && auxQ->getSiglaVeiculo().compare(siglaVeiculo)==0) {
                         pontuacaoQualis = auxQ->getPontuacao();
                     }
                 }
                 if(publicacao->getAno() >= anoMinimo && publicacao->getAno() != anoRegra && publicacao->getAno() < anoRegra) {
-                    if(pontuacaoQualis == 0) {
+                    if(pontuacaoQualis == 1000) {
                         pontos = pontos + regra->valorQualis(publicacao->getQualis());
                     } else {
                         pontos = pontos + pontuacaoQualis;
